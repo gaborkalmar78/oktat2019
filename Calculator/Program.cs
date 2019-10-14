@@ -7,7 +7,7 @@ namespace Calculator
         static void Main(string[] args)
         {
             bool quit = false;
-            int value = 0;
+            double value = 0;
             do
             {
                 System.Console.WriteLine($"Current value: {value}");
@@ -66,13 +66,13 @@ namespace Calculator
 
             return result;
         }
-        private static int GetOperand()
+        private static double GetOperand()
         {
-            int result = 0;
+            double result = 0;
             do
             {
                 Console.Write("Érték? ");
-            } while (!int.TryParse(Console.ReadLine(), out result));
+            } while (!double.TryParse(Console.ReadLine(), out result));
 
             return result;
         }
