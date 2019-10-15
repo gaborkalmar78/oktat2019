@@ -1,0 +1,11 @@
+D:\szilárd\calculator\bin\Debug\netcoreapp2.2\calculator.deps.json
+D:\szilárd\calculator\bin\Debug\netcoreapp2.2\calculator.runtimeconfig.json
+D:\szilárd\calculator\bin\Debug\netcoreapp2.2\calculator.runtimeconfig.dev.json
+d:\szilárd\calculator\bin\Debug\netcoreapp2.2\calculator.dll
+d:\szilárd\calculator\bin\Debug\netcoreapp2.2\calculator.pdb
+d:\szilárd\calculator\obj\Debug\netcoreapp2.2\calculator.csprojAssemblyReference.cache
+d:\szilárd\calculator\obj\Debug\netcoreapp2.2\calculator.csproj.CoreCompileInputs.cache
+d:\szilárd\calculator\obj\Debug\netcoreapp2.2\calculator.AssemblyInfoInputs.cache
+d:\szilárd\calculator\obj\Debug\netcoreapp2.2\calculator.AssemblyInfo.cs
+d:\szilárd\calculator\obj\Debug\netcoreapp2.2\calculator.dll
+d:\szilárd\calculator\obj\Debug\netcoreapp2.2\calculator.pdb
