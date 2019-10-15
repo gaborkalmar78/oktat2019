@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 
 namespace calculator
 {
@@ -13,44 +14,46 @@ namespace calculator
 
         }
 
-        static enumOperand GetEnumOperand()
-        {
-            enumOperand resault = enumOperand.quit;
-            bool ok = false;
-            do
-            {
-                Console.Write("mit csináljakl?");
-                string input = Console.ReadLine();
-                switch (input)
-                {
-                    case "+":
-                        resault = enumOperand.add;
-                        ok = true;
-                        break;
-                    case "-":
-                        resault = enumOperand.Substract;
-                        ok = true;
-                        break;
-                    case "*":
-                        resault = enumOperand.Multiple;
-                        ok = true;
-                        break;
-                    case "/":
-                        resault = enumOperand.Division;
-                        ok = true;
-                        break;
-                    case "q":
-                        break;
-                    default:
-                        break;
-                }
-                return resault;
-            } while (ok);
 
+        static bool igaze()
+        {
+
+
+
+            Console.WriteLine("irj be egy muveletet");
+            string jel = Console.ReadLine();
+            bool viszaters = true;
+            foreach (car a in jel)
+            {
+
+                if (a == '1' || a == '2' || a == '3' || a == '4' || a == '5' || a == '6' || a == '7' || a == '8' || a == '9' || a == '0')
+                {
+
+                }
+                else
+                {
+                    viszaters = false;
+
+                }
+            }
+            return viszaters;
 
         }
+
+        static string muvelet()
+        {
+
+        }
+
+
+
+
+
+
+
     }
 }
+
 
 
 
