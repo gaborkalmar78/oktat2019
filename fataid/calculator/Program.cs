@@ -32,7 +32,7 @@ namespace Calculator
             bool cont = false;
             do
             {
-                Console.WriteLine("Adj meg egy műveletet! (+, -, *, / vagy q a kilépéshez)");
+                Console.WriteLine("Adj meg egy műveletet! (+, -, *, /, % vagy q a kilépéshez)");
                 string userinput = Console.ReadLine();
                 cont = false;
                 switch (userinput)
@@ -48,6 +48,9 @@ namespace Calculator
                         break;
                     case "/":
                         operand = EnumOperand.Division;
+                        break;
+                    case "%":
+                        operand = EnumOperand.Remainder;
                         break;
                     case "q":
                         operand = EnumOperand.Quit;
@@ -91,6 +94,9 @@ namespace Calculator
                                 continue;
                             }
                             result = argument / number;
+                            break;
+                        case EnumOperand.Remainder:
+                            result = argument % number;
                             break;
                         default:
                             break;
