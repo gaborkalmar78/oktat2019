@@ -1,10 +1,14 @@
-public enum enumOperand
+public enum EnumOperand
 {
 
-    quit = 0,
-    add = 1,
-    Substrackt = 2,
+    Quit = 0,
+    Add = 1,
+    Substract = 2,
     Multiple = 3,
     Division = 4,
+    Maradek = 5,
+    COS = 6,
+    COSH = 7
+
 }
 
