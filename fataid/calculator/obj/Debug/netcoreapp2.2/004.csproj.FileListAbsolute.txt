@@ -1,0 +1,11 @@
+D:\anyag\004\bin\Debug\netcoreapp2.2\004.deps.json
+D:\anyag\004\bin\Debug\netcoreapp2.2\004.runtimeconfig.json
+D:\anyag\004\bin\Debug\netcoreapp2.2\004.runtimeconfig.dev.json
+D:\anyag\004\bin\Debug\netcoreapp2.2\004.dll
+D:\anyag\004\bin\Debug\netcoreapp2.2\004.pdb
+D:\anyag\004\obj\Debug\netcoreapp2.2\004.csprojAssemblyReference.cache
+D:\anyag\004\obj\Debug\netcoreapp2.2\004.csproj.CoreCompileInputs.cache
+D:\anyag\004\obj\Debug\netcoreapp2.2\004.AssemblyInfoInputs.cache
+D:\anyag\004\obj\Debug\netcoreapp2.2\004.AssemblyInfo.cs
+D:\anyag\004\obj\Debug\netcoreapp2.2\004.dll
+D:\anyag\004\obj\Debug\netcoreapp2.2\004.pdb
