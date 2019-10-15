@@ -9,5 +9,8 @@ namespace Calculator
         Multiply = 3,
         Division = 4,
         Remainder = 5,
+        Factorial = 6,
+        Define = 7,
+        Power = 8,
     }
 }

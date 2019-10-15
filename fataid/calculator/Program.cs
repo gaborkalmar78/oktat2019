@@ -32,7 +32,7 @@ namespace Calculator
             bool cont = false;
             do
             {
-                Console.WriteLine("Adj meg egy műveletet! (+, -, *, /, % vagy q a kilépéshez)");
+                Console.WriteLine("Adj meg egy műveletet! (=, +, -, *, /, %, !, x vagy q a kilépéshez)");
                 string userinput = Console.ReadLine();
                 cont = false;
                 switch (userinput)
@@ -51,6 +51,15 @@ namespace Calculator
                         break;
                     case "%":
                         operand = EnumOperand.Remainder;
+                        break;
+                    case "!":
+                        operand = EnumOperand.Factorial;
+                        break;
+                    case "=":
+                        operand = EnumOperand.Define;
+                        break;
+                    case "x":
+                        operand = EnumOperand.Power;
                         break;
                     case "q":
                         operand = EnumOperand.Quit;
@@ -97,6 +106,35 @@ namespace Calculator
                             break;
                         case EnumOperand.Remainder:
                             result = argument % number;
+                            break;
+                        case EnumOperand.Define:
+                            result = number;
+                            break;
+                        case EnumOperand.Factorial:
+                            if ((number % 1) != 0)
+                            {
+                                Console.WriteLine("Tört számmal nem számolok faktoriálist!");
+                                break;
+                            }
+                            int i;
+                            result = 1;
+                            for (i = 2; i <= number; i++)
+                            {
+                                result *= i;
+                            }
+                            break;
+                        case EnumOperand.Power:
+                            if ((number % 1) != 0 || number <= 1)
+                            {
+                                Console.WriteLine("Egyellőre csak pozitív, egész számmal tudok hatványozni!");
+                                break;
+                            }
+                            int j;
+                            result = argument;
+                            for (j = 1; j < number; j++)
+                            {
+                                result *= argument;
+                            }
                             break;
                         default:
                             break;
