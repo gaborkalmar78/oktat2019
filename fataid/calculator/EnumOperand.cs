@@ -8,7 +8,7 @@ namespace Calculator
         Substract = 2,
         Multiply = 3,
         Division = 4,
-        Remainder = 5,
+        Modulo = 5,
         Factorial = 6,
         Define = 7,
         Power = 8,

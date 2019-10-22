@@ -50,7 +50,7 @@ namespace Calculator
                         operand = EnumOperand.Division;
                         break;
                     case "%":
-                        operand = EnumOperand.Remainder;
+                        operand = EnumOperand.Modulo;
                         break;
                     case "!":
                         operand = EnumOperand.Factorial;
@@ -104,7 +104,7 @@ namespace Calculator
                             }
                             result = argument / number;
                             break;
-                        case EnumOperand.Remainder:
+                        case EnumOperand.Modulo:
                             result = argument % number;
                             break;
                         case EnumOperand.Define:
