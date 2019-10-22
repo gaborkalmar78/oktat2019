@@ -8,7 +8,8 @@ namespace _006
         {
             Classes.Animal animal = new Classes.Animal();
             Classes.WarmBlooded warm = new Classes.WarmBlooded();
-
+            Classes.Bird bird = new Classes.Bird();
+            bird.SetFlyHeight(5.0);
             Console.WriteLine((animal.Age).ToString());
         }
     }
