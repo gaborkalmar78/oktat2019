@@ -31,7 +31,7 @@ namespace CardGame
 
         public void Play()
         {
-            Random rnd = new Random();
+            Random rnd = new Random((int)DateTime.Now.Ticks);
 
             //Osztás
             for (int i = 0; i < Deck.Length; i++)
