@@ -26,7 +26,7 @@ namespace CardGame
 
         protected abstract bool Check(Card card1, Card card2);
 
-        public Card Best(List<Card> cards)
+        public Card BestCard(List<Card> cards)
         {
             Card best = cards[0];
 
@@ -40,21 +40,36 @@ namespace CardGame
 
             return best;
         }
-    }
-}
 
-public class MaxSpeedCall : CallBase
-{
-    protected override bool Check(Card card1, Card card2)
-    {
-        return card1.MaxSpeed > card2.MaxSpeed;
+        public int WinnerIndex(Card[] cards)
+        {
+            int best = 0;
+
+            for (int i = 1; i < cards.Length; i++)
+            {
+                if (Check(cards[best], cards[i]))
+                {
+                    best = i;
+                }
+            }
+
+            return best;
+        }
     }
-}
-public class MinSpeedCall : CallBase
-{
-    protected override bool Check(Card card1, Card card2)
+
+    public class MaxSpeedCall : CallBase
     {
-        return card1.MaxSpeed < card2.MaxSpeed;
+        protected override bool Check(Card card1, Card card2)
+        {
+            return card1.MaxSpeed > card2.MaxSpeed;
+        }
     }
-}
+    public class MinSpeedCall : CallBase
+    {
+        protected override bool Check(Card card1, Card card2)
+        {
+            return card1.MaxSpeed < card2.MaxSpeed;
+        }
+    }
+
 }
