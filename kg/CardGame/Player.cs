@@ -6,7 +6,7 @@ namespace CardGame
     {
         public string Name { get; set; }
 
-        private List<Card> cards;
+        private List<Card> cards = new List<Card>();
         public List<Card> Cards
         {
             get { return cards; }
