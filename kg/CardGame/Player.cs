@@ -4,7 +4,9 @@ namespace CardGame
 {
     public class Player
     {
-        private List<Card> cards;
+        public string Name { get; set; }
+
+        private List<Card> cards = new List<Card>();
         public List<Card> Cards
         {
             get { return cards; }
