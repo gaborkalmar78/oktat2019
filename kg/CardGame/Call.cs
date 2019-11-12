@@ -72,4 +72,19 @@ namespace CardGame
         }
     }
 
+    public class MinWeightCall : CallBase
+    {
+        protected override bool Check(Card card1, Card card2)
+        {
+            return card1.Weight < card2.Weight;
+        }
+    }
+    public class MaxWeightCall : CallBase
+    {
+        protected override bool Check(Card card1, Card card2)
+        {
+            return card1.Weight > card2.Weight;
+        }
+    }
+
 }
