@@ -61,14 +61,24 @@ namespace CardGame
     {
         protected override bool Check(Card card1, Card card2)
         {
-            return card1.MaxSpeed > card2.MaxSpeed;
+            return card1.MaxSpeed < card2.MaxSpeed;
+        }
+
+        public override string ToString()
+        {
+            return "Max Speed";
         }
     }
     public class MinSpeedCall : CallBase
     {
         protected override bool Check(Card card1, Card card2)
         {
-            return card1.MaxSpeed < card2.MaxSpeed;
+            return card1.MaxSpeed > card2.MaxSpeed;
+        }
+
+        public override string ToString()
+        {
+            return "Min Speed";
         }
     }
 
@@ -76,15 +86,24 @@ namespace CardGame
     {
         protected override bool Check(Card card1, Card card2)
         {
-            return card1.Weight < card2.Weight;
+            return card1.Weight > card2.Weight;
+        }
+
+        public override string ToString()
+        {
+            return "Min Weight";
         }
     }
     public class MaxWeightCall : CallBase
     {
         protected override bool Check(Card card1, Card card2)
         {
-            return card1.Weight > card2.Weight;
+            return card1.Weight < card2.Weight;
+        }
+
+        public override string ToString()
+        {
+            return "Max Weight";
         }
     }
-
 }
