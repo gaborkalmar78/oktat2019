@@ -4,14 +4,37 @@ namespace _008
 {
     public class Game
     {
-        public Game(Card[] cards, List<Player> players)
-        {
-            NumOfCards = cards.Length;
-            //Cards = new List<Card>(cards);
-            Players = players;
-        }
-        private Card[] Deck;
-        private List<Player> Players;
+        private CallBase[] Calls = new CallBase[]{
+            new MaxSpeedCall(),
+            new MinSpeedCall(),
+            new MaxWeightCall(),
+            new MinWeightCall()
+        };
+
+        private Card[] Deck = new Card[]{
+            new Card() {Name = "car1", MaxSpeed = 10, Weight = 1500, Price = 0, Brand = "", Engine = 0},
+            new Card() {Name = "car2", MaxSpeed = 100, Weight = 1300, Price = 0, Brand = "", Engine = 0},
+            new Card() {Name = "car3", MaxSpeed = 200, Weight = 1280, Price = 0, Brand = "", Engine = 0},
+            new Card() {Name = "car4", MaxSpeed = 300, Weight = 1400, Price = 0, Brand = "", Engine = 0},
+            new Card() {Name = "car5", MaxSpeed = 40, Weight = 1460, Price = 0, Brand = "", Engine = 0},
+            new Card() {Name = "car6", MaxSpeed = 128, Weight = 1190, Price = 0, Brand = "", Engine = 0},
+            new Card() {Name = "car7", MaxSpeed = 256, Weight = 1380, Price = 0, Brand = "", Engine = 0},
+            new Card() {Name = "car8", MaxSpeed = 80, Weight = 1200, Price = 0, Brand = "", Engine = 0},
+            new Card() {Name = "car9", MaxSpeed = 180, Weight = 1600, Price = 0, Brand = "", Engine = 0},
+            new Card() {Name = "car10", MaxSpeed = 230, Weight = 1510, Price = 0, Brand = "", Engine = 0},
+        };
+        private List<Player> Players = new List<Player>(){
+            new Player() { Name = "Imre" },
+            new Player() { Name = "Miklos" },
+            new Player() { Name = "Gabor" }
+        };
+
+        // public Game(Card[] cards, List<Player> players)
+        // {
+        //     NumOfCards = cards.Length;
+        //     //Cards = new List<Card>(cards);
+        //     Players = players;
+        // }
         private int NumOfCards = 0;
 
         public void Deal()
@@ -25,17 +48,51 @@ namespace _008
         public void Play()
         {
             //shuffle
+            Shuffle();
             //deal
             Deal();
             Player First = Players[0];
-            Random rnd = new Random();
-            CallBase call = Calls[rnd.Next(Calls.Length];
+            Random rnd = new Random((int)DateTime.Now.Ticks);
+            int turn = 1;
+            int winner = 0;
+            do
+            {
+                File.WriteAllText();
+                CallBase call = Calls[rnd.Next(Calls.Length)];
+                Console.WriteLine($"Forduló: {turn}. Hívás típusa: {call}");
 
-            //select card
-            //select winner
-            int winner = call.WinnerIndex()
-            //check gameover
-    }
+                //select card
+                Card[] cards = new Card[Players.Count];
+                for (int i = 0; i < Players.Count; i++)
+                {
+                    cards[i] = call.BestCard(Players[i].Cards);
+                }
+                for (int i = 0; i < Players.Count; i++)
+                {
+                    Console.WriteLine($"Player {Players[i]}: {cards[i]}");
+                    Players[i].Cards.Remove(cards[i]);
+                }
+
+                //select winner
+                winner = call.WinnerIndex(cards);
+                Console.WriteLine($"Winner {Players[winner]}");
+                Players[winner].Cards.AddRange(cards);
+
+                First = Players[winner];
+                for (int i = Players.Count - 1; i >= 0; i--)
+                {
+                    if (Players[i].Cards.Count == 0)
+                    {
+                        Players.Remove(Players[i]);
+                        Console.WriteLine($"dropped out: {Players[i]}");
+                    }
+                }
+                turn++;
+                //check gameover
+            } while (Players.Count > 1);
+            Console.WriteLine("A nyertes: ");
+            Console.Write(Players[0].Name);
+        }
 
         public Player WhoIsWinner()
         {
@@ -48,19 +105,45 @@ namespace _008
             }
             return null;
         }
+        public void Shuffle()
+        {
+            Card[] Original = new Card[](Deck);
+            Cards.Clear();
+            Random rand = new Random((int)DateTime.Now.Ticks);
+            for (int i = 0; i < NumOfCards; i++)
+            {
+                int iR = rand.Next(Original.Count);
+                Cards.Add(Original[iR]);
+                Original.RemoveAt(iR);
+
+            }
+        }
+        private string ToHtml(Player[] players)
+        {
+            string PlayerRows = "";
+            for (int i = 0; i < players.Length; i++)
+            {
+                PlayerRows += players[i].ToHtml();
+            }
+            string html = "";
+            // string html = @"<!DOCTYPE html>
+            // <html>for()
+            // 	<head>
+            // 		<meta charset="utf - 8">
+            //           < title > Page title </ title >
+
+
+            //          </ head >
+
+
+            //          < body >
+            //         < table >
+            //         { PlayerRows}
+            //         </ table >
+            //          </ body >
+            //      </ html > ";
+            return html;
+        }
     }
 
-    // public void Shuffle()
-    // {
-    //     List<Card> Original = new List<Card>(Cards);
-    //     Cards.Clear();
-    //     Random rand = new Random();
-    //     for (int i = 0; i < NumOfCards; i++)
-    //     {
-    //         int iR = rand.Next(Original.Count);
-    //         Cards.Add(Original[iR]);
-    //         Original.RemoveAt(iR);
-
-    //     }
-    // }
 }

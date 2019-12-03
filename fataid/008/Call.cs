@@ -55,6 +55,10 @@ namespace _008
         {
             return card1.MaxSpeed < card2.MaxSpeed;
         }
+        public override string ToString()
+        {
+            return "Max sebesség";
+        }
     }
 
     public class MinSpeedCall : CallBase
@@ -63,6 +67,32 @@ namespace _008
         {
             return card1.MaxSpeed > card2.MaxSpeed;
         }
+        public override string ToString()
+        {
+            return "Min sebesség";
+        }
 
+    }
+    public class MinWeightCall : CallBase
+    {
+        protected override bool Check(Card card1, Card card2)
+        {
+            return card1.Weight > card2.Weight;
+        }
+        public override string ToString()
+        {
+            return "Min súly";
+        }
+    }
+    public class MaxWeightCall : CallBase
+    {
+        protected override bool Check(Card card1, Card card2)
+        {
+            return card1.Weight < card2.Weight;
+        }
+        public override string ToString()
+        {
+            return "Max súly";
+        }
     }
 }
