@@ -1,0 +1,18 @@
+@model int
+<div>
+    <h1>New Card Game</h1>
+    <form method="POST">
+    <input name="players" type="number" value=@Model />
+
+@for(int i = 1; i<= Model; i++)
+{
+    <div>
+        <label>Player @i:</label>
+        <input id="players">
+    </div>
+}
+
+
+        <input type="submit" value="Start" />
+    </form>
+</div>
