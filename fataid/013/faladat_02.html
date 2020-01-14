@@ -4,6 +4,10 @@
 <head>
     <title>Using styles</title>
     <style>
+        * {
+            border: 1px solid black;
+        }
+
         strong {
             font-weight: 100;
             font-style: italic;
@@ -49,7 +53,7 @@
             font-size: 20px;
         }
 
-        [eper~="Piros"i] {
+        [eper~="Piros"] {
             color: maroon;
         }
 
@@ -72,6 +76,30 @@
         tr:nth-child(3) td:nth-child(2) {
             font-size: 30px;
         }
+
+        div.box {
+            border: 1px solid black;
+            background-color: lightgreen;
+        }
+
+        ul.box {
+            background-color: lightblue;
+        }
+
+        li.box {
+            background-color: lightcoral;
+            height: 100px;
+            width: 100px;
+            padding: 5px;
+            margin: 5px;
+            border: 5px solid black;
+        }
+
+        li.box div {
+            margin: 0px 0px 0px -25px;
+        }
+
+        ol {}
     </style>
 </head>
 
@@ -165,6 +193,31 @@
                 <td>900</td>
             </tr>
         </table>
+        <div class="box">
+            <ul class="box">
+                <li class="box">
+                    <div>alma</div>
+                </li>
+                <li>körte</li>
+                <li>barack</li>
+                <li>szilva</li>
+                <li>eper</li>
+                <li>narancs</li>
+                <li>cseresznye</li>
+                <li>banán</li>
+            </ul>
+        </div>
+        <div>
+            <ol style="width: 20%">
+                <li>Hétfő</li>
+                <li>Kedd</li>
+                <li>Szerda</li>
+                <li>Csütörtök</li>
+                <li>Péntek</li>
+                <li>Szombat</li>
+                <li>Vasárnap</li>
+            </ol>
+        </div>
     </p>
 </body>
 
