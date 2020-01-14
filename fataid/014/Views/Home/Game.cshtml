@@ -1,0 +1,7 @@
+@model string[]
+
+@for(int i=0; i<@Model.Length; i++) {
+    <div>
+        <label>@i.ToString(). játékos neve: @Model[i]</label>
+    </div>
+}

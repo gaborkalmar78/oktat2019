@@ -1,8 +1,30 @@
-﻿@{
+﻿@model Game
+@{
     ViewData["Title"] = "Home Page";
 }
+<form method='post'>
+    <div>
+    <label for='players'>Hány darab játékos legyen?</label>
+    <input id='players' name='players' type="number" value='@Model.Count' min='2' max='5'>
+    </div>
+    <div>
+    <input id='submit' type="submit" value='Módosítás'>
+    </div>
+</form>
 
-<div class="text-center" style="border: 3px solid red;">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<form method='get' action='home/game'>
+    <div>
+    <label for='names'>Játékosok neve:</label>
+    @for(int i=0; i<@Model.Count; i++){
+        //string temp = "Player ";
+        //@name += (i.ToString());
+        //temp += @i.ToString();
+        //<input id='names' temp='names' type="text" placeholder=@temp>
+        <div>
+        <input id='names' name='Game.Names' type="text" value='@Model.Names[i]'>
+        </div>
+    }
+    <input id='submit' type="submit" value='Indítás'>
+    </div>
+</form>
+
