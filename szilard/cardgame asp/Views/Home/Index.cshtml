@@ -1,0 +1,35 @@
+﻿@model Game;
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center" style="border:3px solid red;">
+    <form method="GET" action="/home/game">
+
+    <label for="players"  >hány játékos legyen?
+    </label>
+        <input name="game.playerscount" id="players" type="number" value="@Model.playerscount" max="5" min="2">
+
+        
+        
+        <input type="submit">
+   
+   
+
+        <label>játékosok 1 neve</label>
+        @{
+            for (int i = 0;  i< Model.playerscount; i++)
+            {
+               <div>
+                <label>játékosok @(i+1) neve</label>
+                 <input name="game.playername" type="text" value="@Model.playername[i]">
+                 </div>
+
+            }
+        }
+        
+        <input type="submit" value="ok">
+    </form>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
