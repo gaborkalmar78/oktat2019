@@ -1,4 +1,4 @@
-namespace cardgame_asp.Models
+namespace cardgame_asp.T
 {
     public class Game
     {

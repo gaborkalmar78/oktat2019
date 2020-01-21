@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using cardgame_asp.Models;
+using cardgame_asp.T;
 
 namespace cardgame_asp.Controllers
 {
@@ -41,9 +41,9 @@ namespace cardgame_asp.Controllers
         }
 
 
+
         public IActionResult Index(int players)
         {
-
 
 
 
