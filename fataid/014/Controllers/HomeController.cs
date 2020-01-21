@@ -12,6 +12,7 @@ namespace _014.Controllers
     {
         public IActionResult Index(int players = 2)
         {
+            //ControllerBase cb = new ControllerBase();
             //return View(Math.Clamp(players, 2, 5));
             // int count = Math.Clamp(players, 2, 5);
             // Game game = new Game();
