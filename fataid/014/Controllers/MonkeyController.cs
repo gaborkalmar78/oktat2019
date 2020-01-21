@@ -6,5 +6,9 @@ namespace _014.Controllers
 {
     public class MonkeyController : AnimalControllerBase<Monkey>
     {
+        public override Monkey CreateItem()
+        {
+            return new Monkey(50, 100);
+        }
     }
 }
