@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Using styles</title>
+    <style>
+        * {
+            border: 1px solid black;
+        }
+
+        strong {
+            font-weight: 100;
+            font-style: italic;
+        }
+
+        p {
+            background-color: lightgray;
+            margin: 10px;
+        }
+
+        p:hover {
+            background-color: orange;
+        }
+
+        p::first-line {
+            font-weight: bold;
+            font-size: 40px;
+        }
+
+        input {
+            background-color: red;
+        }
+
+        input:valid {
+            background-color: white;
+        }
+
+        alma {
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            color: orangered;
+        }
+
+        #barack {
+            color: magenta;
+        }
+
+        i {
+            font-weight: bold;
+            font-style: normal;
+        }
+
+        [eper~="nagy"] {
+            font-size: 20px;
+        }
+
+        [eper~="Piros"] {
+            color: maroon;
+        }
+
+        table:hover {
+            background-color: green;
+        }
+
+        tr:hover {
+            background-color: red;
+        }
+
+        td:hover {
+            background-color: cyan;
+        }
+
+        tr:nth-child(odd) {
+            background-color: salmon;
+        }
+
+        tr:nth-child(3) td:nth-child(2) {
+            font-size: 30px;
+        }
+
+        div.box {
+            border: 1px solid black;
+            background-color: lightgreen;
+        }
+
+        ul.box {
+            background-color: lightblue;
+        }
+
+        li.box {
+            background-color: lightcoral;
+            height: 100px;
+            width: 100px;
+            padding: 5px;
+            margin: 5px;
+            border: 5px solid black;
+        }
+
+        li.box div {
+            margin: 0px 0px 0px -25px;
+        }
+
+        ol {}
+    </style>
+</head>
+
+<body>
+    <p eper='nagy'>Én vagyok az, akit a leállósávban lefotóztak, és százezerre büntettek</br>
+        <strong>Kamerákkal felszerelt civil autókból figyelik a rendőrök a szabálytalankodókat már egy ideje, az akció
+            jelenleg is tart.</strong> <i>A rendőrség szerint főként olyan autósokat szűrtek ki, akik buszsávban
+            közlekedtek, áthajtottak a piroson, figyelmen kívül hagyták a kötelező haladási irányt, telefonáltak vezetés
+            közben, vagy éppen engedély nélkül vezettek.</i>
+        <alma>Cikkünk megjelenése után két olvasó is jelentkezett,
+            mindketten azt állították: őket büntették meg százezer forintra, amiért a leállósávban haladtak az
+            autóikkal.</alma>
+        <strong id='barack'>Csakhogy mindketten azt állítják, megvolt az okuk arra, hogy a leállósávban közlekedjenek,
+            tehát nem azért
+            tették ezt, mert - ahogy azt a rendőrségi közlemények sugallják - "pofátlan" sofőrök lennének. (A rendőrségi
+            videó Pofátlan(TAN)ítás címmel jelent meg.)</strong>
+        Egyikük, F., azt írta, hogy az autópálya azon szakaszán fotózták le, ahol állandó kamera van, mindezt már
+        sötétben. F. azt állítja, műszaki hiba miatt haladt ekkora sebességgel. "Kopogott a motor, egyenletes
+        gázadagolás ellenére folyamatosan lassult" - írta. Azt állította, azért ment a leállósávba, mert ekkora
+        sebességnél nem lett volna tanácsos a többi sávban maradni. "Ha a gépkocsival 60km/h fölött haladtam volna a
+        leállósávba, akkor indokolt a "haladás" definíció, de a műszaki okból való lassulás nem azonos a haladással. Mit
+        tegyen ilyenkor a vezető? Hajtson bele az árokba, vagy a szalagkorlátnak,vagy “döcögjön” 55-tel a külső sávban,
+        szabálytalanul? A gépkocsi még tudott gurulni csökkent teljesítmény mellett, ezért választottam egy biztonságos
+        megoldást" - írta.
+    </p>
+    <p eper='piros'>
+        Megszavazták a bírói és az ügyészi béremelést</br>
+        Megszavazta a parlament a bírói és ügyészi béremelésről szóló módosító javaslatot, valamint a teljes bíróságokat
+        érintő törvénycsomagot az egyfokú járási hivatali eljárások megteremtéséről. A szavazáson nem vett részt az
+        MSZP, a DK, valamint a Párbeszéd frakciója.
+        A mai rendkívüli ülésre azért volt szükség, mert december 10-én a zárószavazásoknál, a bírói bérre vonatkozó,
+        eredetileg Hende Csaba által benyújtott módosító kétharmadot igénylő részének megszavazásakor 29 fideszes
+        képviselő nemet nyomott, így a teljes összegző módosító csomagról szavazásnál már csak tartózkodást nyomtak a
+        kormánypárti képviselők, míg az eredetileg benyújtott kormányjavaslat átment.
+    </p>
+    <p eper='nagy piros'>
+        Ferenc pápa eltörölte a kiskorúakkal szembeni szexuális visszaélések titkosítását</br>
+        Ferenc pápa közölte kedden, hogy eltörli a legmagasabb szintű titkosítást, amely eddig a kiskorúakkal szemben
+        papok által elkövetett szexuális visszaélések, erőszak és pedopornográfia vatikáni és egyházmegyei jogi
+        dokumentációjára vonatkozott, írja az MTI. Az intézkedés a polgári hatóságokkal való együttműködés elősegítését
+        célozza.
+    </p>
+    <p>
+        <input type='number' min="10" max="100">
+    </p>
+    <p>
+        <table>
+            <tr>
+                <td>100</td>
+                <td>200</td>
+                <td>300</td>
+            </tr>
+            <tr>
+                <td>400</td>
+                <td>500</td>
+                <td>600</td>
+            </tr>
+            <tr>
+                <td>700</td>
+                <td>800</td>
+                <td>900</td>
+            </tr>
+            <tr>
+                <td>100</td>
+                <td>200</td>
+                <td>300</td>
+            </tr>
+            <tr>
+                <td>400</td>
+                <td>500</td>
+                <td>600</td>
+            </tr>
+            <tr>
+                <td>700</td>
+                <td>800</td>
+                <td>900</td>
+            </tr>
+            <tr>
+                <td>100</td>
+                <td>200</td>
+                <td>300</td>
+            </tr>
+            <tr>
+                <td>400</td>
+                <td>500</td>
+                <td>600</td>
+            </tr>
+            <tr>
+                <td>700</td>
+                <td>800</td>
+                <td>900</td>
+            </tr>
+        </table>
+        <div class="box">
+            <ul class="box">
+                <li class="box">
+                    <div>alma</div>
+                </li>
+                <li>körte</li>
+                <li>barack</li>
+                <li>szilva</li>
+                <li>eper</li>
+                <li>narancs</li>
+                <li>cseresznye</li>
+                <li>banán</li>
+            </ul>
+        </div>
+        <div>
+            <ol style="width: 20%">
+                <li>Hétfő</li>
+                <li>Kedd</li>
+                <li>Szerda</li>
+                <li>Csütörtök</li>
+                <li>Péntek</li>
+                <li>Szombat</li>
+                <li>Vasárnap</li>
+            </ol>
+        </div>
+    </p>
+</body>
+
+</html>

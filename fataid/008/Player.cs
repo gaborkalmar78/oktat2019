@@ -20,9 +20,12 @@ namespace _008
             string CardCells = "";
             for (int i = 0; i < Cards.Count; i++)
             {
-                CardCells += $"<td>{Cards[i].ToHtml()}</td>";
+                CardCells += $"<td>{Cards[i].ToHtml()}</td>\n";
             }
-            return CardCells;
+            return $@"<tr>
+                       <th>{Name}</th>
+                        {CardCells}
+                    </tr>";
         }
     }
 }
