@@ -1,0 +1,20 @@
+@model DataModel[]
+@{
+    ViewData["Title"] = "Data page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Data</h1>
+    <table>
+        <tr>
+            <th>Value</th>
+            <th>Name</th>
+        </tr>
+        @for(int i=0; i<Model.Length; i++) {
+            <tr>
+                <td>@Model[i].Value</td>
+                <td>@Model[i].Name</td>
+            </tr>
+        }
+    </table>
+</div>

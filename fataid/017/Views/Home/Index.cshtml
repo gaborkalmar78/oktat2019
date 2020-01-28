@@ -1,0 +1,13 @@
+﻿@model string
+@{
+    ViewData["Title"] = "Starting page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Login</h1>
+    <form method="POST" action="/home/login">
+        <div><label for="name">Username: </label><input id="name" name="name" value="@Model"/></div>
+        <div><label for="pass">Password: </label><input id="pass" name="pass" type="password"/></div>
+        <div><input type="submit"/></div>
+    </form>
+</div>
