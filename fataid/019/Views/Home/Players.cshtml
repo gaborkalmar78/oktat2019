@@ -1,0 +1,17 @@
+@model string[]
+@{
+    ViewData["Title"] = "Játékosok nevei";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Adja meg a játékosok neveit!</h1>
+    <form method="POST" action="/home/game">
+        @for(int i = 0; i<@Model.Length; i++) {
+            <div>
+                <label for="player@i">@(i+1). játékos neve: </label>
+                <input id="player@i" name="players" value="@Model[i]"/>
+            </div>
+        }
+        <div><input type="submit" id="start" value="Tovább"/></div>
+    </form>
+</div>
