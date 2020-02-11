@@ -35,5 +35,10 @@ namespace CardGame
                 }
             }
         }
+
+        public static bool SortByMaxSpeed(Card a, Card b)
+        {
+            return a.MaxSpeed > b.MaxSpeed;
+        }
     }
 }
