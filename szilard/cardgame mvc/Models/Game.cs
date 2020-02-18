@@ -5,6 +5,10 @@ namespace cardgame_mvc.Models
         public Player[] Players { get; set; }
         public Card[] Deck { get; set; }
 
+        private int index = 0;
+
+        public static Game Instance { get; set; }
+
 
         public Game(Card[] deck, string[] names)
         {
@@ -15,7 +19,31 @@ namespace cardgame_mvc.Models
             {
                 Players[i] = new Player(names[i]);
             }
+            index = Deck.Length;
+        }
+
+        public void Deal(int count)
+        {
+
+
+            for (int j = 0; j < count; j++)
+            {
+                for (int i = 0; i < Players.Length; i++)
+                {
+                    index--;
+                    Players[i].Deck.Add(Deck[index]);
+                }
+            }
+
+
+
+
+
+
+
 
         }
+
+
     }
 }

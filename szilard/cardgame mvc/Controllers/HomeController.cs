@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using cardgame_mvc.Models;
+using Microsoft.AspNetCore.Routing;
 
 namespace cardgame_mvc.Controllers
 {
@@ -33,7 +34,9 @@ namespace cardgame_mvc.Controllers
             }
             if (stringtest == true)
             {
-                RedirectToAction("Index,Game,");
+                RouteValueDictionary rwd = new RouteValueDictionary();
+                rwd.Add("names", playersname);
+                return RedirectToAction("Start", "Game", rwd);
             }
             return View(playersname);
 

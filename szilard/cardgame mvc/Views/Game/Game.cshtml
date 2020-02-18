@@ -1,0 +1,40 @@
+@model Game
+<form method="Post">
+
+   
+    
+       @for (int i = 0; i < Model.Players.Length; i++)
+       {<table>
+            <tr>
+                <td>@Model.Players[i].Name</td>
+            </tr>
+             <tr>
+                 <td>
+                       @for (int j = 0; j < @Model.Players[i].Deck.Count; j++)
+                       {
+                            <table style="display:inline-block;">
+                                <tr>
+                                    <td>Weight:</td>
+                                    <td>@Model.Players[i].Deck[j].Weight</td>
+                                </tr>
+                                <tr>   
+                                    <td>Speed:</td>
+                                    <td>@Model.Players[i].Deck[j].Speed</td>
+                            
+                                </tr>
+                                <tr>      
+                                    <td>Price:</td>
+                                    <td>@Model.Players[i].Deck[j].Price</td>
+                                </tr>
+                            </table>
+                       }                                      
+                 </td>
+            </tr>
+            
+            
+        </table>
+       }     
+   
+
+
+</form>

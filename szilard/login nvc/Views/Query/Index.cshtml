@@ -1,0 +1,24 @@
+@model QueryModel
+
+
+@{
+    ViewData["Title"] = "Query Page";
+}
+
+
+<form method="POST" action="/Query/query"> 
+    <div>
+    <label for="max" >
+        MAX
+    </label >
+    <input type="number" name="max" value="@Model.Max">
+    </div>
+      <div>
+    <label for="min">
+        MIN
+    </label >
+    <input type="number" name="min" value="@Model.Min">
+    </div>
+    <input type="submit" value="lekérés">
+
+</form>
