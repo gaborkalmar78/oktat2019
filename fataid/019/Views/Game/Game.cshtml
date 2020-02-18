@@ -1,0 +1,61 @@
+﻿@model Game
+@{
+    ViewData["Title"] = "Game";
+}
+
+<div class="text-center">
+
+    <h1 class="display-4">Players and their cards</h1>
+    <style>
+        td.b_t {
+            border-bottom: 1px solid black;
+            border-left: 1px solid black;
+            border-right: 1px solid;
+        }
+        td.b_r {
+            border-bottom: 1px solid black;
+            border-top: 1px solid;
+            border-left: 1px solid black;
+        }
+        td.b_b {
+            border-top: 1px solid;
+            border-left: 1px solid black;
+            border-right: 1px solid;
+        }
+        td.b_l {
+            border-bottom: 1px solid black;
+            border-top: 1px solid;
+            border-right: 1px solid;
+        }
+        table.card {
+            display: inline-block;
+        }
+    </style>
+    <table class="card">
+        @for(int i=0; i<Model.Players.Length; i++) {
+            <tr>
+                <td class="b_b" >@Model.Players[i].Name</td>
+            </tr>
+            <tr>
+                <td class="b_t">
+                    @for(int j=0; j<Model.Players[i].Deck.Count(); j++) {
+                        <table class="card">
+                            <tr>
+                                <td class="b_r">Weight:</td>
+                                <td class="b_l">@Model.Players[i].Deck[j].Weight</td>
+                            </tr>
+                            <tr>
+                                <td class="b_r">Speed:</td>
+                                <td class="b_l">@Model.Players[i].Deck[j].Speed</td>
+                            </tr>
+                            <tr>
+                                <td class="b_r">Price:</td>
+                                <td class="b_l">@Model.Players[i].Deck[j].Price</td>
+                            </tr>
+                        </table>
+                    }
+                </td>
+            </tr>
+        }
+    </table>
+</div>
