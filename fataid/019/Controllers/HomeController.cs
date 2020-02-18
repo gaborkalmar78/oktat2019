@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using _019.Models;
+using Microsoft.AspNetCore.Routing;
 
 namespace _019.Controllers
 {
@@ -29,17 +30,22 @@ namespace _019.Controllers
             //return Players(playernumber);
         }
 
-        public IActionResult Game(string[] players)
+        public IActionResult StartGame(string[] players)
         {
             for (int i = 0; i < players.Length; i++)
             {
                 if (string.IsNullOrWhiteSpace(players[i]))
                 {
                     return View("Players", players);
-                    //return RedirectToAction("Players", "Home", players);
                 }
             }
-            return View("Gamestart", players);
+            RouteValueDictionary rwd = new RouteValueDictionary();
+            rwd.Add("players", players);
+            //return View("Gamestart", players);
+            //Game.temp = players;
+            //rwd.Add
+            //return RedirectToAction("Start", "Game", players.ToList());
+            return RedirectToAction("Start", "Game", rwd);
         }
 
         public IActionResult Privacy()
