@@ -1,9 +1,12 @@
 @model Game
 <form method="Post">
 
+    
+
    
     
        @for (int i = 0; i < Model.Players.Length; i++)
+      
        {<table>
             <tr>
                 <td>@Model.Players[i].Name</td>
@@ -12,19 +15,45 @@
                  <td>
                        @for (int j = 0; j < @Model.Players[i].Deck.Count; j++)
                        {
-                            <table style="display:inline-block;">
+                            <table class="card" >
                                 <tr>
-                                    <td>Weight:</td>
-                                    <td>@Model.Players[i].Deck[j].Weight</td>
+                                    <td class="left">Weight:</td>
+                                    <td  class="right">
+                                        @if(i==Model.ActualPlayer)  
+                                        {
+                                            <a href="/Game/Call?Card=@j&prop=Weight">@Model.Players[i].Deck[j].Weight</a>
+                                        }
+                                        else
+                                        {
+                                            @Model.Players[i].Deck[j].Weight
+                                        }                                        
+                                    </td>
                                 </tr>
                                 <tr>   
-                                    <td>Speed:</td>
-                                    <td>@Model.Players[i].Deck[j].Speed</td>
-                            
+                                    <td class="left">Speed:</td>
+                                    <td class="right">
+                                        @if(i==Model.ActualPlayer)  
+                                        {
+                                            <a href="/Game/Call?Card=@j&prop=Speed">@Model.Players[i].Deck[j].Speed</a>
+                                        }
+                                        else
+                                        {
+                                            @Model.Players[i].Deck[j].Speed
+                                        }   
+                                    </td>                          
                                 </tr>
                                 <tr>      
-                                    <td>Price:</td>
-                                    <td>@Model.Players[i].Deck[j].Price</td>
+                                    <td class="left">Price:</td>
+                                    <td class="right">    
+                                        @if(i==Model.ActualPlayer)  
+                                        {
+                                            <a href="/Game/Call?Card=@j&prop=Price">@Model.Players[i].Deck[j].Price</a>
+                                        }
+                                        else
+                                        {
+                                            @Model.Players[i].Deck[j].Price
+                                        }
+                                    </td>
                                 </tr>
                             </table>
                        }                                      
