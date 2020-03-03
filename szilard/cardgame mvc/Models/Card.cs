@@ -5,6 +5,8 @@ namespace cardgame_mvc.Models
     public class Card
     {
         public int Weight { get; set; }
+
+
         public int Price { get; set; }
         public int Speed { get; set; }
 
@@ -15,6 +17,7 @@ namespace cardgame_mvc.Models
             this.Weight = 900 + (r.Next(18) * 100);
             this.Speed = 150 + (r.Next(12) * 10);
             this.Price = 500000 + (r.Next(50) * 500000);
+
         }
 
         public static Card[] Generate(int db)
@@ -29,6 +32,23 @@ namespace cardgame_mvc.Models
             return cards;
         }
 
+        public int Getvalue(string prop)
+        {
+            switch (prop)
+            {
+                case "Speed":
+                    return Speed;
+                    break;
+                case "Weight":
+                    return Weight;
+                    break;
+                case "Price":
+                    return Price;
+                    break;
+                default:
+                    return 0;
+            }
+        }
 
 
     }
