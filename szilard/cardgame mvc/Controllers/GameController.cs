@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using cardgame_mvc.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,26 +19,34 @@ namespace cardgame_mvc.Controllers
             Game game = Game.Instance;
             game.Prop = prop;
             game.Cards[game.ActualPlayer] = card;
-            game.Next();
+            do
+            {
+                game.Next();
+            } while (game.Players[game.ActualPlayer].Deck.Count == 0);
+
             if (game.ActualPlayer == game.Callee)
             {
                 int best = game.GetWinner();
-                Card[] cards = new Card[game.Players.Length];
-                for (int i = 0; i < game.Players.Length; i++)
-                {
-                    cards[i] = game.Players[i].Deck[game.Cards[i]];
-                    game.Players[i].Deck.RemoveAt(game.Cards[i]);
+                game.MoveCarsdToPLayer(best);
 
-                }
-                game.Players[best].Deck.AddRange(cards);
+                game.UppDateRanks();
 
                 game.Callee = best;
                 game.ActualPlayer = best;
 
+                if (game.EndOFGame())
+                {
+                    return View("Result", game);
+                }
+
+
             }
+
 
 
             return View("Game", game);
         }
+
+
     }
 }

@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace cardgame_mvc.Models
 {
     public class Game
@@ -63,18 +65,68 @@ namespace cardgame_mvc.Models
         {
             int best = 0;
 
-            for (int i = 1; i < Players.Length; i++)
+            while (Players[best].Deck.Count == 0)
+            {
+                best++;
+            }
+
+            for (int i = best + 1; i < Players.Length; i++)
 
             {
-                Card card1 = Players[i].Deck[Cards[i]];
-                Card card2 = Players[best].Deck[Cards[best]];
-                if (card1.Getvalue(Prop) > card2.Getvalue(Prop))
+                if (Players[i].Deck.Count != 0)
                 {
-                    best = i;
+                    Card card1 = Players[i].Deck[Cards[i]];
+                    Card card2 = Players[best].Deck[Cards[best]];
+                    if (card1.Getvalue(Prop) > card2.Getvalue(Prop))
+                    {
+                        best = i;
+                    }
                 }
             }
 
             return best;
+        }
+
+        public void MoveCarsdToPLayer(int best)
+        {
+            List<Card> cards = new List<Card>();
+            for (int i = 0; i < Players.Length; i++)
+            {
+                if (Players[i].Deck.Count != 0)
+                {
+                    cards.Add(Players[i].Deck[Cards[i]]);
+                    Players[i].Deck.RemoveAt(Cards[i]);
+                }
+
+            }
+            Players[best].Deck.AddRange(cards);
+        }
+
+        public bool EndOfTurn()
+        {
+            return ActualPlayer == Callee;
+        }
+
+        public bool EndOFGame()
+        {
+            int count = 0;
+            for (int i = 0; i < Players.Length; i++)
+            {
+                if (Players[i].Deck.Count > 0)
+                {
+                    count++;
+                }
+
+            }
+            return count == 1;
+        }
+
+        public void UppDateRanks()
+        {
+            for (int i = 0; i < Players.Length; i++)
+            {
+                Players[i].UppDateRank();
+            }
         }
     }
 }
