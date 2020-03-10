@@ -24,6 +24,19 @@ namespace _019.Models
         public int Weight { get; set; }
         public int Speed { get; set; }
         public int Price { get; set; }
-
+        public int Strength(string prop)
+        {
+            switch (prop)
+            {
+                case "Weight":
+                    return Weight;
+                case "Speed":
+                    return Speed;
+                case "Price":
+                    return Price;
+                default:
+                    return 0;
+            }
+        }
     }
 }

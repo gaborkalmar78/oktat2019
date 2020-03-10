@@ -24,9 +24,35 @@ namespace _019.Controllers
         {
             int size = 72;
             Game.Instance = new Game(Card.Generate(size), players);
+            Game game = Game.Instance;
             //Game.Instance = new Game(Card.Generate(size), Game.temp);
-            Game.Instance.Deal(5);
-            return View("Game", Game.Instance);
+            game.Deal(5);
+            return View("Game", game);
+        }
+
+        public IActionResult Call(int Card, string Prop)
+        {
+            Game game = Game.Instance;
+            game.CallProp = Prop;
+            game.CallCards[game.ActPlayer] = Card;
+            do
+            {
+                game.Next();
+            } while (!game.Players[game.ActPlayer].Active);
+
+            if (game.ActPlayer == game.Callee)
+            {
+                game.Callee = game.GetWinner();
+                game.ActPlayer = game.Callee;
+                game.Reward(game.Callee);
+                game.UpdateRanks();
+                if (game.IsFinished())
+                {
+                    game.Result[0] = game.Players[game.Callee].Name;
+                    return View("End", game);
+                }
+            }
+            return View("Game", game);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
