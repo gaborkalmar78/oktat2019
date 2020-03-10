@@ -35,11 +35,22 @@ namespace _019.Controllers
             Game game = Game.Instance;
             game.CallProp = Prop;
             game.CallCards[game.ActPlayer] = Card;
-            game.Next();
+            do
+            {
+                game.Next();
+            } while (!game.Players[game.ActPlayer].Active);
+
             if (game.ActPlayer == game.Callee)
             {
                 game.Callee = game.GetWinner();
+                game.ActPlayer = game.Callee;
                 game.Reward(game.Callee);
+                game.UpdateRanks();
+                if (game.IsFinished())
+                {
+                    game.Result[0] = game.Players[game.Callee].Name;
+                    return View("End", game);
+                }
             }
             return View("Game", game);
         }

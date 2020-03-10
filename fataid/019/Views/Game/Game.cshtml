@@ -10,18 +10,18 @@
 <div class="text-center">
 
     <h1 class="display-4">Players and their cards</h1>
-    <table class="card">
+    <table class="main">
         @for(int i=0; i<Model.Players.Length; i++) {
             <tr>
                 <td class="full" >@Model.Players[i].Name</td>
             </tr>
-            <tr>
+            <tr class="scrollable">
                 <td class="b_t">
                     @for(int j=0; j<Model.Players[i].Deck.Count(); j++) {
                         <table class="card">
                             <tr>
                                 <td class="b_r">Weight:</td>
-                                @if(i==Model.ActPlayer) {
+                                @if(i==Model.ActPlayer && (i==Model.Callee || Model.CallProp=="Weight")) {
                                     <td class="b_l"><a href='/Game/Call?Card=@j&Prop=Weight'>@Model.Players[i].Deck[j].Weight</a></td>
                                 }
                                 else
@@ -32,7 +32,7 @@
                             </tr>
                             <tr>
                                 <td class="b_r">Speed:</td>
-                                @if(i==Model.ActPlayer) {
+                                @if(i==Model.ActPlayer && (i==Model.Callee || Model.CallProp=="Speed")) {
                                     <td class="b_l"><a href='/Game/Call?Card=@j&Prop=Speed'>@Model.Players[i].Deck[j].Speed</a></td>
                                 }
                                 else
@@ -42,7 +42,7 @@
                             </tr>
                             <tr>
                                 <td class="b_r">Price:</td>
-                                @if(i==Model.ActPlayer) {
+                                @if(i==Model.ActPlayer && (i==Model.Callee || Model.CallProp=="Price")) {
                                     <td class="b_l"><a href='/Game/Call?Card=@j&Prop=Price'>@Model.Players[i].Deck[j].Price</a></td>
                                 }
                                 else

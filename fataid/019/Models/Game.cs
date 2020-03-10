@@ -11,6 +11,8 @@ namespace _019.Models
         public int Callee { get; set; }
         public string CallProp { get; set; }
         public int[] CallCards { get; set; }
+        public string[] Result { get; set; }
+        public int Step { get; set; }
         public Player[] Players { get; set; }
         public Card[] Deck { get; set; }
         public Game(Card[] deck, string[] names)
@@ -26,6 +28,8 @@ namespace _019.Models
             Callee = 0;
             CallProp = null;
             CallCards = new int[names.Length];
+            Result = new string[names.Length];
+            Step = (names.Length) - 1;
             //Game.Instance = this;
         }
         public void Deal(int size)
@@ -50,9 +54,13 @@ namespace _019.Models
         public int GetWinner()
         {
             int best = 0;
-            for (int i = 1; i < Players.Length; i++)
+            while (!Players[best].Active)
             {
-                if (Players[best].Deck[CallCards[best]].Strength(CallProp) < Players[i].Deck[CallCards[i]].Strength(CallProp))
+                best++;
+            }
+            for (int i = (best + 1); i < Players.Length; i++)
+            {
+                if (Players[i].Active && Players[best].Deck[CallCards[best]].Strength(CallProp) < Players[i].Deck[CallCards[i]].Strength(CallProp))
                 {
                     best = i;
                 }
@@ -63,8 +71,43 @@ namespace _019.Models
         {
             for (int i = 0; i < Players.Length; i++)
             {
-                Players[winner].Deck.Add(Players[i].Deck[CallCards[i]]);
-                Players[i].Deck.RemoveAt(CallCards[i]);
+                if (Players[i].Active)
+                {
+                    Players[winner].Deck.Add(Players[i].Deck[CallCards[i]]);
+                    Players[i].Deck.RemoveAt(CallCards[i]);
+                }
+                if (!Players[i].Ranked && !Players[i].Active)
+                {
+                    Players[i].Ranked = true;
+                    Result[Step] = Players[i].Name;
+                    Step--;
+                }
+            }
+        }
+        public bool IsFinished()
+        {
+            int counter = 0;
+            for (int i = 0; i < Players.Length; i++)
+            {
+                if (Players[i].Active)
+                {
+                    counter++;
+                }
+                else
+                {
+                    Players[i].Rank++;
+                }
+            }
+            return counter < 2;
+        }
+        public void UpdateRanks()
+        {
+            for (int i = 0; i < Players.Length; i++)
+            {
+                if (!Players[i].Active)
+                {
+                    Players[i].Rank++;
+                }
             }
         }
     }
