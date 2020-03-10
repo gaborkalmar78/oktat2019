@@ -52,7 +52,7 @@ namespace _019.Models
             int best = 0;
             for (int i = 1; i < Players.Length; i++)
             {
-                if (Players[best].Deck[CallCards[best]].Strength(CallProp) < Players[i].Deck[i].Strength(CallProp))
+                if (Players[best].Deck[CallCards[best]].Strength(CallProp) < Players[i].Deck[CallCards[i]].Strength(CallProp))
                 {
                     best = i;
                 }
