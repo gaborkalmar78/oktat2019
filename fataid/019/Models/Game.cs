@@ -95,7 +95,7 @@ namespace _019.Models
                 }
                 else
                 {
-                    Players[i].Rank++;
+                    //Players[i].Rank++;
                 }
             }
             return counter < 2;
@@ -107,6 +107,22 @@ namespace _019.Models
                 if (!Players[i].Active)
                 {
                     Players[i].Rank++;
+                }
+            }
+        }
+        public void SortPlayers()
+        {
+            for (int i = 0; i < Players.Length; i++)
+            {
+                for (int j = 1; j < Players.Length; j++)
+                {
+                    if (Players[j - 1].Rank > Players[j].Rank)
+                    {
+                        Player player;
+                        player = Players[j - 1];
+                        Players[j - 1] = Players[j];
+                        Players[j] = player;
+                    }
                 }
             }
         }

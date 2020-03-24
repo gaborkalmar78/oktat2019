@@ -49,6 +49,7 @@ namespace _019.Controllers
                 if (game.IsFinished())
                 {
                     game.Result[0] = game.Players[game.Callee].Name;
+                    game.SortPlayers();
                     return View("End", game);
                 }
             }
