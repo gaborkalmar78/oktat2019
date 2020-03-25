@@ -11,8 +11,6 @@ namespace _019.Models
         public int Callee { get; set; }
         public string CallProp { get; set; }
         public int[] CallCards { get; set; }
-        public string[] Result { get; set; }
-        public int Step { get; set; }
         public Player[] Players { get; set; }
         public Card[] Deck { get; set; }
         public Game(Card[] deck, string[] names)
@@ -28,8 +26,6 @@ namespace _019.Models
             Callee = 0;
             CallProp = null;
             CallCards = new int[names.Length];
-            Result = new string[names.Length];
-            Step = (names.Length) - 1;
             //Game.Instance = this;
         }
         public void Deal(int size)
@@ -76,12 +72,6 @@ namespace _019.Models
                     Players[winner].Deck.Add(Players[i].Deck[CallCards[i]]);
                     Players[i].Deck.RemoveAt(CallCards[i]);
                 }
-                if (!Players[i].Ranked && !Players[i].Active)
-                {
-                    Players[i].Ranked = true;
-                    Result[Step] = Players[i].Name;
-                    Step--;
-                }
             }
         }
         public bool IsFinished()
@@ -112,6 +102,36 @@ namespace _019.Models
         }
         public void SortPlayers()
         {
+            bool cont = false;
+            for (int i = 0; i < Players.Length; i++)
+            {
+                cont = false;
+                for (int j = 1; j < (Players.Length - i); j++)
+                {
+                    cont = CompareRank(ref Players[j - 1], ref Players[j]) || cont;
+                }
+                if (!cont)
+                {
+                    break;
+                }
+            }
+        }
+
+        private bool CompareRank(ref Player Player1, ref Player Player2)
+        {
+            if (Player1.Rank > Player2.Rank)
+            {
+                Player temp;
+                temp = Player1;
+                Player1 = Player2;
+                Player2 = temp;
+                return true;
+            }
+            return false;
+        }
+
+        public void SortPlayersOld()
+        {
             for (int i = 0; i < Players.Length; i++)
             {
                 for (int j = 1; j < Players.Length; j++)
@@ -124,6 +144,36 @@ namespace _019.Models
                         Players[j] = player;
                     }
                 }
+            }
+        }
+        public void Cheat()
+        {
+            int altered;
+            for (int i = 0; i < Players.Length; i++)
+            {
+                switch (i)
+                {
+                    case 0:
+                        altered = 55;
+                        break;
+                    case 1:
+                        altered = 0;
+                        break;
+                    case 2:
+                        altered = 33;
+                        break;
+                    case 3:
+                        altered = 11;
+                        break;
+                    case 4:
+                        altered = 22;
+                        break;
+                    default:
+                        altered = 99 + i;
+                        break;
+                }
+                Players[i].OriginalID = i;
+                Players[i].Rank = altered;
             }
         }
     }

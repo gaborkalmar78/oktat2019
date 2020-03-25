@@ -9,7 +9,7 @@ namespace _019.Models
         {
             Name = name;
             Deck = new List<Card>();
-            Ranked = false;
+            OriginalID = -1;
             Rank = 0;
         }
         public string Name { get; set; }
@@ -18,8 +18,8 @@ namespace _019.Models
         {
             get { return Deck.Count > 0; }
         }
-        public bool Ranked { get; set; }
         public int Rank { get; set; }
+        public int OriginalID { get; set; }
         public List<Card> Deck { get; set; }
     }
 
