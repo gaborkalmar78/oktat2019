@@ -48,7 +48,7 @@ namespace _019.Controllers
                 game.UpdateRanks();
                 if (game.IsFinished())
                 {
-                    game.Cheat();
+                    //game.Cheat();
                     game.SortPlayers();
                     return View("End", game);
                 }

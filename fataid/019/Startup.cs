@@ -30,7 +30,12 @@ namespace _019
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
-
+            services.AddSession((SessionOptions o) =>
+            {
+                o.Cookie.IsEssential = true;
+                o.Cookie.HttpOnly = true;
+                o.IdleTimeout = TimeSpan.FromMinutes(10);
+            });
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
@@ -52,6 +57,7 @@ namespace _019
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
+            app.UseSession();
 
             app.UseMvc(routes =>
             {

@@ -4,6 +4,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - _019</title>
+    @if(ViewData.ContainsKey("Refresh")) {
+        <meta http-equiv="refresh" content="@ViewData["Refresh"]">
+
+    }
 
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
