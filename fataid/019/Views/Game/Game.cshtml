@@ -21,7 +21,7 @@
                         <table class="card">
                             <tr>
                                 <td class="b_r">Weight:</td>
-                                @if(i==Model.ActPlayer && (i==Model.Callee || Model.CallProp=="Weight")) {
+                                @if(i==Model.ActPlayerID && (i==Model.CalleeID || Model.CallProp=="Weight")) {
                                     <td class="b_l"><a href='/Game/Call?Card=@j&Prop=Weight'>@Model.Players[i].Deck[j].Weight</a></td>
                                 }
                                 else
@@ -32,7 +32,7 @@
                             </tr>
                             <tr>
                                 <td class="b_r">Speed:</td>
-                                @if(i==Model.ActPlayer && (i==Model.Callee || Model.CallProp=="Speed")) {
+                                @if(i==Model.ActPlayerID && (i==Model.CalleeID || Model.CallProp=="Speed")) {
                                     <td class="b_l"><a href='/Game/Call?Card=@j&Prop=Speed'>@Model.Players[i].Deck[j].Speed</a></td>
                                 }
                                 else
@@ -42,7 +42,7 @@
                             </tr>
                             <tr>
                                 <td class="b_r">Price:</td>
-                                @if(i==Model.ActPlayer && (i==Model.Callee || Model.CallProp=="Price")) {
+                                @if(i==Model.ActPlayerID && (i==Model.CalleeID || Model.CallProp=="Price")) {
                                     <td class="b_l"><a href='/Game/Call?Card=@j&Prop=Price'>@Model.Players[i].Deck[j].Price</a></td>
                                 }
                                 else

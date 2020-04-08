@@ -1,32 +1,50 @@
 using System;
+using System.Collections.Generic;
 
 namespace _019.Models
 {
     public class Game
     {
-        public static Game Instance { get; set; }
-        public static string[] temp { get; set; }
+        public static Dictionary<string, Player> SessionPlayers = new Dictionary<string, Player>();
         private int index = 0;
-        public int ActPlayer { get; set; }
-        public int Callee { get; set; }
+        public int ActPlayerID { get; set; }
+        public Player ActPlayer
+        {
+            get { return Players[ActPlayerID]; }
+        }
+        public int CalleeID { get; set; }
+        public Player Callee
+        {
+            get { return Players[CalleeID]; }
+        }
         public string CallProp { get; set; }
         public int[] CallCards { get; set; }
         public Player[] Players { get; set; }
         public Card[] Deck { get; set; }
-        public Game(Card[] deck, string[] names)
+        // public Game(Card[] deck, string[] names)
+        // {
+        //     Deck = deck;
+        //     Players = new Player[names.Length];
+        //     for (int i = 0; i < names.Length; i++)
+        //     {
+        //         Players[i] = new Player(names[i]);
+        //     }
+        //     index = deck.Length;
+        //     ActPlayer = 0;
+        //     Callee = 0;
+        //     CallProp = null;
+        //     CallCards = new int[names.Length];
+        //     //Game.Instance = this;
+        // }
+        public Game(Card[] deck, Player[] players)
         {
             Deck = deck;
-            Players = new Player[names.Length];
-            for (int i = 0; i < names.Length; i++)
-            {
-                Players[i] = new Player(names[i]);
-            }
+            Players = players;
             index = deck.Length;
-            ActPlayer = 0;
-            Callee = 0;
+            ActPlayerID = 0;
+            CalleeID = 0;
             CallProp = null;
-            CallCards = new int[names.Length];
-            //Game.Instance = this;
+            CallCards = new int[players.Length];
         }
         public void Deal(int size)
         {
@@ -45,7 +63,7 @@ namespace _019.Models
         }
         public void Next()
         {
-            ActPlayer = (ActPlayer + 1) % Players.Length;
+            ActPlayerID = (ActPlayerID + 1) % Players.Length;
         }
         public int GetWinner()
         {
