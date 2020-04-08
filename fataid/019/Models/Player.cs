@@ -11,6 +11,8 @@ namespace _019.Models
             Deck = new List<Card>();
             OriginalID = -1;
             Rank = 0;
+            LookAtTable = false;
+            CheckedTable = false;
         }
         public string Name { get; set; }
 
@@ -20,6 +22,8 @@ namespace _019.Models
         }
         public int Rank { get; set; }
         public int OriginalID { get; set; }
+        public bool LookAtTable { get; set; }
+        public bool CheckedTable { get; set; }
         public List<Card> Deck { get; set; }
         public Game MyGame { get; set; }
     }

@@ -14,44 +14,50 @@
 <div class="text-center">
 
     <h1 class="display-4">@Model.Player.Name</h1>
-    <table class="main">
-        <tr class="scrollable">
-            <td class="b_t">
-                @for(int j=0; j<Model.Player.Deck.Count(); j++) {
-                    <table class="card">
-                        <tr>
-                            <td class="b_r">Weight:</td>
-                            @if(Model.Player==Model.Game.ActPlayer && (Model.Player==Model.Game.Callee || Model.Game.CallProp=="Weight")) {
-                                <td class="b_l"><a href='/Home/Call?Card=@j&Prop=Weight'>@Model.Player.Deck[j].Weight</a></td>
-                            }
-                            else
-                            {
-                                <td class="b_l">@Model.Player.Deck[j].Weight</td>
-                            }
-                            
-                        </tr>
-                        <tr>
-                            <td class="b_r">Speed:</td>
-                            @if(Model.Player==Model.Game.ActPlayer && (Model.Player==Model.Game.Callee || Model.Game.CallProp=="Speed")) {
-                                <td class="b_l"><a href='/Home/Call?Card=@j&Prop=Speed'>@Model.Player.Deck[j].Speed</a></td>
-                            }
-                            else
-                            {
-                                <td class="b_l">@Model.Player.Deck[j].Speed</td>
-                            }
-                        </tr>
-                        <tr>
-                            <td class="b_r">Price:</td>
-                            @if(Model.Player==Model.Game.ActPlayer && (Model.Player==Model.Game.Callee || Model.Game.CallProp=="Price")) {
-                                <td class="b_l"><a href='/Home/Call?Card=@j&Prop=Price'>@Model.Player.Deck[j].Price</a></td>
-                            }
-                            else
-                            {
-                                <td class="b_l">@Model.Player.Deck[j].Price</td>
-                            }
-                        </tr>
-                    </table>
-                }
-            </td>
-        </tr>
+    @if(Model.Player.Active) {
+        <table class="main">
+            <tr class="scrollable">
+                <td class="b_t">
+                    @for(int j=0; j<Model.Player.Deck.Count(); j++) {
+                        <table class="card">
+                            <tr>
+                                <td class="b_r">Weight:</td>
+                                @if(Model.Player==Model.Game.ActPlayer && (Model.Player==Model.Game.Callee || Model.Game.CallProp=="Weight")) {
+                                    <td class="b_l"><a href='/Home/Call?Card=@j&Prop=Weight'>@Model.Player.Deck[j].Weight</a></td>
+                                }
+                                else
+                                {
+                                    <td class="b_l">@Model.Player.Deck[j].Weight</td>
+                                }
+                                
+                            </tr>
+                            <tr>
+                                <td class="b_r">Speed:</td>
+                                @if(Model.Player==Model.Game.ActPlayer && (Model.Player==Model.Game.Callee || Model.Game.CallProp=="Speed")) {
+                                    <td class="b_l"><a href='/Home/Call?Card=@j&Prop=Speed'>@Model.Player.Deck[j].Speed</a></td>
+                                }
+                                else
+                                {
+                                    <td class="b_l">@Model.Player.Deck[j].Speed</td>
+                                }
+                            </tr>
+                            <tr>
+                                <td class="b_r">Price:</td>
+                                @if(Model.Player==Model.Game.ActPlayer && (Model.Player==Model.Game.Callee || Model.Game.CallProp=="Price")) {
+                                    <td class="b_l"><a href='/Home/Call?Card=@j&Prop=Price'>@Model.Player.Deck[j].Price</a></td>
+                                }
+                                else
+                                {
+                                    <td class="b_l">@Model.Player.Deck[j].Price</td>
+                                }
+                            </tr>
+                        </table>
+                    }
+                </td>
+            </tr>
+        </table>
+    }
+    else {
+        <h2>You are out of the game, be patient.</h2>
+    }
 </div>

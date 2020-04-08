@@ -1,0 +1,39 @@
+﻿@model Game
+@{
+    ViewData["Title"] = "Selected Cards";
+    ViewData["Refresh"] = "6";
+}
+
+<head>
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+
+<div class="text-center">
+
+    <h1 class="display-4">Selected cards</h1>
+    <table class="main">
+        @for(int i=0; i<Model.Table.Count; i++) {
+            <tr>
+                <td class="full" >@Model.Players[Model.Table[i].PreviousOwnerID].Name selected this card:</td>
+            </tr>
+            <tr>
+                <td class="b_t">
+                    <table class="card">
+                        <tr>
+                            <td class="b_r">Weight:</td>
+                            <td class="b_l">@Model.Table[i].Weight</td>
+                        </tr>
+                        <tr>
+                            <td class="b_r">Speed:</td>
+                            <td class="b_l">@Model.Table[i].Speed</td>
+                        </tr>
+                        <tr>
+                            <td class="b_r">Price:</td>
+                            <td class="b_l">@Model.Table[i].Price</td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        }
+    </table>
+</div>

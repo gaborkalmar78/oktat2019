@@ -60,7 +60,7 @@ namespace _019.Controllers
                     players[i].MyGame = game;
                     players[i].OriginalID = i;
                 }
-                game.Deal(5);
+                game.Deal(3);
                 return RedirectToAction(nameof(Play));
             }
             else
@@ -81,7 +81,17 @@ namespace _019.Controllers
         public IActionResult Play()
         {
             Player player = Game.SessionPlayers[SessionID];
-            return View(new PlayModel(player.MyGame, player));
+            Game game = player.MyGame;
+            // if (game.IsFinished())
+            // {
+            //     return View("End", game);
+            // }
+            // else if (player.LookAtTable)
+            if (player.LookAtTable)
+            {
+                return RedirectToAction("ShowTable");
+            }
+            return View(new PlayModel(game, player));
         }
 
         public IActionResult Call(int Card, string Prop)
@@ -90,14 +100,13 @@ namespace _019.Controllers
             Game game = player.MyGame;
             if (player != game.ActPlayer)
             {
-                if (game.IsFinished())
-                {
-                    return View("End", game);
-                }
                 return RedirectToAction(nameof(Play));
             }
             game.CallProp = Prop;
-            game.CallCards[game.ActPlayerID] = Card;
+            //game.CallCards[game.ActPlayerID] = Card;
+            Card SelCard = game.ActPlayer.Deck[Card];
+            game.SelectedCards.Add(SelCard);
+            game.ActPlayer.Deck.Remove(SelCard);
             do
             {
                 game.Next();
@@ -113,14 +122,31 @@ namespace _019.Controllers
                 {
                     //game.Cheat();
                     game.SortPlayers();
-                    return View("End", game);
+                    //return View("End", game);
                 }
+                return RedirectToAction("ShowTable");
             }
             return RedirectToAction(nameof(Play));
             // return View(nameof(Play), new PlayModel(game, player));
             //return View("Game", game);
         }
 
+        public IActionResult ShowTable()
+        {
+            Player player = Game.SessionPlayers[SessionID];
+            if (!player.CheckedTable)
+            {
+                player.CheckedTable = true;
+                return View("ShowTable", player.MyGame);
+            }
+            player.CheckedTable = false;
+            player.LookAtTable = false;
+            if (player.MyGame.IsFinished())
+            {
+                return View("End", player.MyGame);
+            }
+            return RedirectToAction(nameof(Play));
+        }
         public IActionResult Privacy()
         {
             return View();

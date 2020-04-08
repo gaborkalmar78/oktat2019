@@ -19,6 +19,8 @@ namespace _019.Models
         }
         public string CallProp { get; set; }
         public int[] CallCards { get; set; }
+        public List<Card> SelectedCards { get; set; }
+        public List<Card> Table { get; set; }
         public Player[] Players { get; set; }
         public Card[] Deck { get; set; }
         // public Game(Card[] deck, string[] names)
@@ -45,6 +47,8 @@ namespace _019.Models
             CalleeID = 0;
             CallProp = null;
             CallCards = new int[players.Length];
+            SelectedCards = new List<Card>();
+            Table = new List<Card>();
         }
         public void Deal(int size)
         {
@@ -57,6 +61,7 @@ namespace _019.Models
                     {
                         return;
                     }
+                    Deck[index].CurrentOwnerID = i;
                     Players[i].Deck.Add(Deck[index]);
                 }
             }
@@ -68,29 +73,51 @@ namespace _019.Models
         public int GetWinner()
         {
             int best = 0;
-            while (!Players[best].Active)
+            // while (!Players[best].Active)
+            // {
+            //     best++;
+            // }
+            // for (int i = (best + 1); i < Players.Length; i++)
+            // {
+            //     if (Players[i].Active && Players[best].Deck[CallCards[best]].Strength(CallProp) < Players[i].Deck[CallCards[i]].Strength(CallProp))
+            //     {
+            //         best = i;
+            //     }
+            // }
+            // return best;
+            for (int i = (best + 1); i < SelectedCards.Count; i++)
             {
-                best++;
-            }
-            for (int i = (best + 1); i < Players.Length; i++)
-            {
-                if (Players[i].Active && Players[best].Deck[CallCards[best]].Strength(CallProp) < Players[i].Deck[CallCards[i]].Strength(CallProp))
+                if (SelectedCards[best].Strength(CallProp) < SelectedCards[i].Strength(CallProp))
                 {
                     best = i;
                 }
+                else
+                {
+                    SelectedCards[i].Winner = false;
+                }
             }
-            return best;
+            SelectedCards[best].Winner = true;
+            return SelectedCards[best].CurrentOwnerID;
         }
         public void Reward(int winner)
         {
-            for (int i = 0; i < Players.Length; i++)
+            // for (int i = 0; i < Players.Length; i++)
+            // {
+            //     if (Players[i].Active)
+            //     {
+            //         Players[winner].Deck.Add(Players[i].Deck[CallCards[i]]);
+            //         Players[i].Deck.RemoveAt(CallCards[i]);
+            //     }
+            // }
+            for (int i = 0; i < SelectedCards.Count; i++)
             {
-                if (Players[i].Active)
-                {
-                    Players[winner].Deck.Add(Players[i].Deck[CallCards[i]]);
-                    Players[i].Deck.RemoveAt(CallCards[i]);
-                }
+                SelectedCards[i].PreviousOwnerID = SelectedCards[i].CurrentOwnerID;
+                SelectedCards[i].CurrentOwnerID = winner;
             }
+            Table.Clear();
+            Table.AddRange(SelectedCards);
+            Players[winner].Deck.AddRange(SelectedCards);
+            SelectedCards.Clear();
         }
         public bool IsFinished()
         {
@@ -112,6 +139,7 @@ namespace _019.Models
         {
             for (int i = 0; i < Players.Length; i++)
             {
+                Players[i].LookAtTable = true;
                 if (!Players[i].Active)
                 {
                     Players[i].Rank++;
