@@ -5,7 +5,7 @@ namespace _019.Models
 {
     public class Game
     {
-        public static Dictionary<string, Player> SessionPlayers = new Dictionary<string, Player>();
+        //public static Dictionary<string, Player> SessionPlayers = new Dictionary<string, Player>();
         private int index = 0;
         public int ActPlayerID { get; set; }
         public Player ActPlayer
