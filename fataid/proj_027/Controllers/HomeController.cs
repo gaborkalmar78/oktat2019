@@ -55,7 +55,7 @@ namespace _019.Controllers
                     players[i].MyGame = game;
                     players[i].OriginalID = i;
                 }
-                game.Deal(3);
+                game.Deal(5);
                 return RedirectToAction(nameof(Play));
             }
             else
@@ -117,7 +117,7 @@ namespace _019.Controllers
             {
                 game.CalleeID = game.GetWinner();
                 game.ActPlayerID = game.CalleeID;
-                game.Reward(game.CalleeID);
+                //game.Reward(game.CalleeID);
                 game.UpdateRanks();
                 if (game.IsFinished())
                 {

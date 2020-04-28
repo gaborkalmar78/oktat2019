@@ -118,3 +118,7 @@ tr.scrollable {
   height: 100px;
   overflow: auto;
 }
+td.pyramid {
+    border: 1px solid black;
+    background-color: brown;
+}
