@@ -26,6 +26,10 @@ namespace project_021.Controllers
         {
             return post.Content.Length>100;
         }
+        public bool StartsWithA(Post post)
+        {
+            return post.Content.Length > 100;
+        }
         public IActionResult Privacy()
         {
             return View();
