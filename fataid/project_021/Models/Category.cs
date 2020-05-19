@@ -9,6 +9,7 @@ namespace project_021.Models
         public Category()
         {
             Topics = new List<Topic>();
+            ID = Guid.NewGuid();
         }
         /*
         public Category (string title)
@@ -48,6 +49,7 @@ namespace project_021.Models
         }
 
         public string Title { get; set; }
+        public Guid ID { get; }
         public List<Topic> Topics { get; set; }
     }
 }
