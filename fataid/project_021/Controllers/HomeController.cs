@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using project_021.DataBase;
 using project_021.Models;
 
 namespace project_021.Controllers
@@ -11,14 +12,19 @@ namespace project_021.Controllers
     public class HomeController : Controller
     {
         private Category[] categories;
-        public HomeController()
+        public HomeController(BlogContext context)
         {
+            Context = context;
+            Random rnd = new Random();
             //GenericList<Post> posts = new GenericList<Post>();
             //posts.Add(new Post("Henry", "0"));
             //posts.Add(new Post("David", "1"));
             //posts.Add(new Post("Tom", "2"));
             //Post[] query=posts.Where(A);
-            categories = Category.Factory(100, new Random());
+            Topic top1 = Topic.Factory(1, rnd)[0];
+            context.Topics.Add(top1);
+            context.SaveChanges();
+            categories = Category.Factory(100, rnd);
             IEnumerable<Category> filtered1 = categories.Where(B);
             IEnumerable<Category> filtered2 = categories.Where((c) => { return false; });
             IEnumerable<Category> filtered5 = categories.Where(c=> false);
@@ -44,7 +50,7 @@ namespace project_021.Controllers
                 .Select(c => c.Title)
                 .ToList();
         }
-
+        BlogContext Context;
         private bool B(Category cat)
         {
             return cat.Title.Contains("2");
@@ -52,7 +58,7 @@ namespace project_021.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            return View(Context.Topics.Count());
         }
         public bool A(Post post)
         {

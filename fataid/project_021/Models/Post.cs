@@ -7,6 +7,7 @@ namespace project_021.Models
     {
         public Post()
         {
+            ID = Guid.NewGuid();
         }
 
         public Post(string createdBy, string content)
@@ -34,6 +35,7 @@ namespace project_021.Models
             }
             return posts;
         }
+        public Guid ID { get; set; }
         public string CreatedBy { get; set; }
         public DateTime CreatedAt { get; set; }
         public string Content { get; set; }

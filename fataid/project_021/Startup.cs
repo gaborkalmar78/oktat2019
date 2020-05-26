@@ -7,8 +7,10 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using project_021.DataBase;
 using project_021.Models;
 
 namespace project_021
@@ -32,11 +34,14 @@ namespace project_021
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.Configure<CookiePolicyOptions>(options =>
+            var options = new DbContextOptionsBuilder<BlogContext>().UseInMemoryDatabase("Blog").Options;
+            services.AddDbContext<BlogContext>();
+            services.AddSingleton(options);
+            services.Configure<CookiePolicyOptions>(o =>
             {
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
-                options.CheckConsentNeeded = context => true;
-                options.MinimumSameSitePolicy = SameSiteMode.None;
+                o.CheckConsentNeeded = context => true;
+                o.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
 

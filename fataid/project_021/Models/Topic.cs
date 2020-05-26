@@ -7,6 +7,7 @@ namespace project_021.Models
     {
         public Topic()
         {
+            ID = Guid.NewGuid();
             Posts = new List<Post>();
         }
         //public Topic(bool isPrivate, bool isEnabled, string title)
@@ -36,6 +37,7 @@ namespace project_021.Models
             }
             return topics;
         }
+        public Guid ID { get; set; }
         public bool IsPrivate { get; set; }
         public bool IsEnabled { get; set; }
         public string Title { get; set; }
