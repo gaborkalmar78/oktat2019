@@ -41,6 +41,7 @@ namespace project_021.Models
         public bool IsPrivate { get; set; }
         public bool IsEnabled { get; set; }
         public string Title { get; set; }
+        //public bool IsVisible { get; set; }
         public List<Post> Posts { get; set; }
     }
 }

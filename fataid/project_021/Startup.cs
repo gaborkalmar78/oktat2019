@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -23,7 +18,7 @@ namespace project_021
         {
             Category c1 = new Category();
             Category c2 = new Category("barmi");
-            Category c3 = new Category("akarmi",new Topic[]{});
+            Category c3 = new Category("akarmi", new Topic[] { });
             Category c4 = new Category("semmi", new Topic(), new Topic());
             c1.Rename1();
             Configuration = configuration;
@@ -34,7 +29,8 @@ namespace project_021
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var options = new DbContextOptionsBuilder<BlogContext>().UseInMemoryDatabase("Blog").Options;
+            //var options = new DbContextOptionsBuilder<BlogContext>().UseInMemoryDatabase("Blog").Options;
+            var options = new DbContextOptionsBuilder<BlogContext>().UseSqlite("Data Source=Data.db").Options;
             services.AddDbContext<BlogContext>();
             services.AddSingleton(options);
             services.Configure<CookiePolicyOptions>(o =>
