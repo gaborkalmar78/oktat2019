@@ -1,0 +1,16 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@inject UserManager usermgr
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor httpcontext
+@{User user = usermgr.GetUser(httpcontext.HttpContext.Session.Id);}
+@if (user == null)
+{
+    <p><a asp-controller="Auth" asp-action="Login">Bejelentkezés</a></p>
+    <p><a asp-controller="Auth" asp-action="Register">Regisztráció</a></p>
+}
+else
+{
+    <p>@user.Name </p>
+    <p><a asp-controller="Auth" asp-action="Logout">Kijelentkezés</a></p>
+}

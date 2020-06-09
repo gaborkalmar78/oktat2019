@@ -1,0 +1,36 @@
+﻿@model Game
+@{
+    ViewData["Title"] = "End";
+}
+
+<head>
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+
+<div class="text-center">
+    <div>Game is concluded!</div>
+    <div>
+        <table class="card">
+            <tr>
+                <td colspan="3" format="bold">Ranking</td>
+            </tr>
+            <tr>
+                <td format="underlined">Place</td>
+                <td format="underlined">Name</td>
+                <td format="underlined">Rank</td>
+            </tr>
+            @for(int i=0; i<Model.Players.Length; i++) {
+                <tr>
+                    <td class="full" >@(i+1).</td>
+                    <td class="full" >@Model.Players[i].Name</td>
+                    <td class="full" >@Model.Players[i].Rank</td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
+<div class="text-center">
+    <form method="POST" action="/home/Index">
+        <input type="submit" id="startanew" value="Start new game"/>
+    </form>
+</div>

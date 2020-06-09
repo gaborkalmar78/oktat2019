@@ -1,0 +1,32 @@
+﻿@using _019.Models.CantStop;
+@model PlayerModel[]
+<table>
+    @for (int row = 0; row < 8; row++)
+    {
+        <tr>
+            @for (int col = 0; col < 11; col++)
+            {
+                bool pyramid = row >= Math.Abs(5 - col);
+            <td class='@(pyramid? "pyramid":"")'>
+                @for (int p = 0; p < Model.Length; p++)
+                {
+                    if (Model[p].Coloumns[col] == row)
+                    {
+                        <span>@p</span>
+                    }
+                    if (Model[p].Temp[col] >0 && (Model[p].Coloumns[col]+Model[p].Temp[col]) == row)
+                    {
+                        <span>@($"t{p}")</span>
+                    }
+                }
+            </td>
+            }
+        </tr>
+    }
+    <tr>
+        @for (int i = 2; i < 13; i++)
+        {
+            <td class="pyramid">@i</td>
+        }
+    </tr>
+</table>

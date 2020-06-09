@@ -1,0 +1,124 @@
+﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+a.navbar-brand {
+  white-space: normal;
+  text-align: center;
+  word-break: break-all;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  font-size: 14px;
+}
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.border-top {
+  border-top: 1px solid #e5e5e5;
+}
+.border-bottom {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow {
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy {
+  font-size: 1rem;
+  line-height: inherit;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  white-space: nowrap;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  line-height: 60px; /* Vertically center the text there */
+}
+table, th, td {
+  border: 1px solid black;
+}
+td.b_t {
+  /*border-bottom: 1px solid black;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+  border-width: 0px 1px 1px 1px; */
+  border-top-width: 0px;
+  /* border-radius: 0px 0px 50px 50px; */
+}
+td.b_r {
+  /* border-bottom: 1px solid black;
+  border-top: 1px solid black;
+  border-left: 1px solid black;
+  border-width: 1px 0px 1px 1px; */
+  border-right-width: 0px;
+  /* border-radius: 50px 0px 0px 50px; */
+}
+td.b_b {
+  /* border-top: 1px solid black;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+  border-width: 1px 0px 1px 1px; */
+  border-bottom-width: 0px;
+  /* border-radius: 50px 50px 0px 0px; */
+}
+td.b_l {
+  /* border-bottom: 1px solid black;
+  border-top: 1px solid black;
+  border-right: 1px solid black;
+  border-width: 1px 1px 1px 0px; */
+  border-left-width: 0px;
+  /* border-radius: 0px 50px 50px 0px; */
+}
+td[winner=yes] {
+  background-color: lawngreen;
+  font-weight: bold;
+}
+td[winner=no] {
+  background-color: tomato;
+}
+td[owner=me] {
+  background-color: aqua;
+}
+td[format=bold] {
+  font-weight: bold;
+}
+td[format=underlined] {
+  text-decoration: underline;
+}
+table.main {
+  /* table-layout:fixed; */
+  display: inline-block;
+}
+table.card {
+  /* table-layout:fixed; */
+  display: inline-block;
+  /* border-radius: 50px; */
+}
+tr.scrollable {
+  height: 100px;
+  overflow: auto;
+}
+td.pyramid {
+    border: 1px solid black;
+    background-color: brown;
+}

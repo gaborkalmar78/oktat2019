@@ -1,0 +1,22 @@
+﻿@model string
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    @* <h1 class="display-4">Session ID is: @Model</h1> *@
+    <h2 class="display-4">Adja meg a játékosok számát!</h2>
+    @* <form method="POST" action="/home/players"> *@
+    <form method="POST" action="/home/playernew">
+        <div><label for="playername">Add meg a neved: </label>
+        <input type = "text" id="playername" name="playername">
+        <div><label for="playernumber">Játékosok száma: </label>
+        <select id="playernumber" name="playernumber" itemtype="number">
+            <option value=2>2</option>
+            <option value=3>3</option>
+            <option value=4>4</option>
+            <option value=5>5</option>
+        </select></div>
+        <div><input type="submit" id="start" value="Indít"/></div>
+    </form>
+</div>

@@ -1,0 +1,80 @@
+﻿@model PlayModel
+@{
+    ViewData["Title"] = "Selected Cards";
+    ViewData["Refresh"] = "6";
+}
+
+<head>
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+
+<div class="text-center">
+
+    <h1 class="display-4">Selected cards</h1>
+    <table class="main">
+        @{string status=""; string name=""; string owner="";}
+        @for(int i=0; i<Model.Game.Table.Count; i++) {
+            name=Model.Game.Players[Model.Game.Table[i].PreviousOwnerID].Name;
+            if(name==Model.Player.Name){
+                name="You";
+                owner="me";
+            }
+            else {
+                owner="";
+            }
+            <tr>
+                <td class="full" owner=@owner>@name selected this card:</td>
+            </tr>
+            <tr>
+                <td class="b_t">
+                    <table class="card">
+                        <tr>
+                            @if(Model.Game.Table[i].Winner && Model.Game.CallProp=="Weight") {
+                                status="yes";
+                            }
+                            else if(Model.Game.CallProp=="Weight") {
+                                status="no";
+                            }
+                            else {
+                                status="";
+                            }
+                            <td class="b_r" winner=@status>Weight:</td>
+                            <td class="b_l" winner=@status>@Model.Game.Table[i].Weight</td>
+                        </tr>
+                        <tr>
+                            @if(Model.Game.Table[i].Winner && Model.Game.CallProp=="Speed") {
+                                status="yes";
+                            }
+                            else if(Model.Game.CallProp=="Speed") {
+                                status="no";
+                            }
+                            else {
+                                status="";
+                            }
+                            <td class="b_r" winner=@status>Speed:</td>
+                            <td class="b_l" winner=@status>@Model.Game.Table[i].Speed</td>
+                        </tr>
+                        <tr>
+                            @if(Model.Game.Table[i].Winner && Model.Game.CallProp=="Price") {
+                                status="yes";
+                            }
+                            else if(Model.Game.CallProp=="Price") {
+                                status="no";
+                            }
+                            else {
+                                status="";
+                            }
+                            <td class="b_r" winner=@status>Price:</td>
+                            <td class="b_l" winner=@status>@Model.Game.Table[i].Price</td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+<div class="text-center">
+    <form method="POST" action="/home/ShowTable">
+        <input type="submit" id="continue" value="Continue" />
+    </form>
+</div>
