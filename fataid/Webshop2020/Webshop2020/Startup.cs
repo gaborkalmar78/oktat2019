@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
+using Webshop2020.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using User.DAL;
-using User.Models;
 
-namespace User
+namespace Webshop2020
 {
     public class Startup
     {
@@ -27,13 +27,18 @@ namespace User
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            DbContextOptions<Context> opt = new DbContextOptionsBuilder<Context>().UseSqlite("Data Source=User.db").Options;
-            services.AddSingleton(opt);
-            services.AddDbContext<Context>();
-            services.AddSingleton(new UserManager());
-            services.AddHttpContextAccessor();
-            services.AddSession();
+            DbContextOptions<WebshopDbContext> options = new DbContextOptionsBuilder<WebshopDbContext>().UseSqlite(Configuration.GetConnectionString("WebshopDB")).Options;
+            services.AddSingleton(options);
+            services.AddDbContext<WebshopDbContext>();
+
+            services.AddDbContext<UserDbContext>(options =>
+                options.UseSqlite(
+                    Configuration.GetConnectionString("UserDB")));
+            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                .AddEntityFrameworkStores<UserDbContext>();
+
             services.AddControllersWithViews();
+            services.AddRazorPages().AddRazorRuntimeCompilation();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -42,6 +47,7 @@ namespace User
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseDatabaseErrorPage();
             }
             else
             {
@@ -51,9 +57,10 @@ namespace User
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-            app.UseSession();
+
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
@@ -61,6 +68,7 @@ namespace User
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapRazorPages();
             });
         }
     }

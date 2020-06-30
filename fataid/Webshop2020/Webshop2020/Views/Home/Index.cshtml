@@ -1,0 +1,134 @@
+﻿@model IndexViewModel
+@{
+    ViewData["Title"] = "Home Page";
+    string CreateSub(Category category, string prefix, int level)
+    {
+        string suffix = "";
+        if (category.Children.Count > 0)
+        {
+            for (int i = 0; i < category.Children.Count; i++)
+            {
+                CreateSub(category.Children[i], "| ", level + 1);
+            }
+        }
+        return prefix + suffix;
+    }
+    int PosInTree(Category category, int start)
+    {
+        int level = 0;
+        if (category.Parent != null)
+        {
+            level = PosInTree(category.Parent, level + 1);
+        }
+        return level + start;
+    }
+    Category[] Filter(Category[] categories)
+    {
+        List<Category> parents = new List<Category>();
+        for (int i = 0; i < categories.Length; i++)
+        {
+            if (categories[i].Parent == null)
+            {
+                parents.Add(categories[i]);
+            }
+        }
+        //parents.Sort(x => x.Name);
+        //parents.Sort();
+        return parents.ToArray();
+    }
+    async Task<string> Helper(Category[] items, int level)
+    {
+        for (int j = 0; j < items.Length; j++)
+        {
+            <tr>
+                @for(int i = 0; i < level; i++)
+                {
+                    <td>| </td>
+                }
+                <td> +-</td>
+                <td colspan = "100"><a asp-controller="Home" asp-action="Index" asp-route-ID="@items[j].ID">@items[j].Name</a></td>
+
+            </tr>
+            if (items[j].Children != null)
+            {
+                await Helper(items[j].Children.OrderBy(x => x.Name).ToArray(), level + 1);
+            }
+        }
+        return string.Empty;
+    }
+}
+
+<div class="text-center">
+<h1 class="display-4">Welcome</h1>
+<table style="border-width:2px; border-color:black">
+    <tr>
+        <td>
+            <table>
+                <tr><td colspan="100"> +</td></tr>
+                @Helper(Model.Categories.Where(x => x.Parent == null).OrderBy(x => x.Name).ToArray(), 0)
+
+            </table>
+        </td>
+        <td>
+            @if (Model.Products!=null)
+            {
+                <table>
+                    <tr>
+                        <th>Név</th>
+                        <th>Ár</th>
+                        <th>Mennyiség</th>
+                    </tr>
+                    @for(int j=0;j<Model.Products.Length;j++) {
+                        <tr>
+                            <td>@Model.Products[j].Name</td>
+                            <td>@Model.Products[j].Price</td>
+                            <td>@Model.Products[j].Stock</td>
+                        </tr>
+                    }
+                </table>
+            }
+        </td>
+    </tr>
+</table>
+    @*
+        <table style="border-width:2px; border-color:black">
+            <tr>
+                <td>
+                    +
+                </td>
+            </tr>
+            @{
+                int count = Model.Length;
+                string addon= "| ";
+                string prefix = "+-";
+                Category[] parents = Filter(Model);
+            }
+            @for (int i = 0; i < count; i++)
+            {
+                <tr>
+                    @for(int j=0;j< PosInTree(parents[i],0);j++)
+                    {
+                    <td>
+                        @addon
+                    </td>
+                    }
+                    <td>
+                        @prefix
+                    </td>
+                    <td colspan="100">
+                        @Model[i].Name
+                    </td>
+                </tr>
+            }
+        </table>
+    *@
+    </div>
+
+    @*
+        +
+        +-Category1
+        | +-Category1_1
+        | | +-Category_1_1_1
+        | +-Category1_2
+        +-Category2
+    *@
