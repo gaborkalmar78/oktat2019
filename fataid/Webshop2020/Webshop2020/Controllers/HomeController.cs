@@ -45,6 +45,16 @@ namespace Webshop2020.Controllers
             }
             return View(new IndexViewModel(cats, products));
         }
+        public IActionResult Product(Guid? ID)
+        {
+            Category[] cats = context.Categories.Include(x => x.Children).Include(x => x.Parent).AsNoTracking().ToArray();
+            Product product = null;
+            if (ID != null)
+            {
+                product = context.Products.FirstOrDefault(x => x.ID == ID);
+            }
+            return View(new ProductViewModel(cats, product));
+        }
 
         public IActionResult Privacy()
         {

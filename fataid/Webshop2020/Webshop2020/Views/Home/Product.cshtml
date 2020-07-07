@@ -1,0 +1,87 @@
+﻿@model ProductViewModel
+@{
+    ViewData["Title"] = "Product";
+    string CreateSub(Category category, string prefix, int level)
+    {
+        string suffix = "";
+        if (category.Children.Count > 0)
+        {
+            for (int i = 0; i < category.Children.Count; i++)
+            {
+                CreateSub(category.Children[i], "| ", level + 1);
+            }
+        }
+        return prefix + suffix;
+    }
+    int PosInTree(Category category, int start)
+    {
+        int level = 0;
+        if (category.Parent != null)
+        {
+            level = PosInTree(category.Parent, level + 1);
+        }
+        return level + start;
+    }
+    async Task<string> Helper(Category[] items, int level)
+    {
+        for (int j = 0; j < items.Length; j++)
+        {
+            <tr>
+                @for (int i = 0; i < level; i++)
+                {
+                    <td>| </td>
+                }
+                <td> +-</td>
+                <td colspan="100"><a asp-controller="Home" asp-action="Index" asp-route-ID="@items[j].ID">@items[j].Name</a></td>
+
+            </tr>
+            if (items[j].Children != null)
+            {
+                await Helper(items[j].Children.OrderBy(x => x.Name).ToArray(), level + 1);
+            }
+        }
+        return string.Empty;
+    }
+}
+
+<div class="text-center">
+    <h1 class="display-4"></h1>
+    <table style="border-width:2px; border-color:black">
+        <tr>
+            <td>
+                <table>
+                    <tr><td colspan="100"> +</td></tr>
+                    @await Helper(Model.Categories.Where(x => x.Parent == null).OrderBy(x => x.Name).ToArray(), 0)
+
+                </table>
+            </td>
+            <td>
+                @if (Model.Product != null)
+                {
+                <table>
+                    <tr>
+                        <th colspan="2">@Model.Product.Name</th>
+                    </tr>
+                    <tr>
+                        <td>Ár</td>
+                        <td>@Model.Product.Price</td>
+                    </tr>
+                    <tr>
+                        <td>Készlet</td>
+                        <td>@Model.Product.Stock</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <form asp-controller="Cart" asp-action="Add" method="POST">
+                                <input asp-for="Product.ID" type="hidden" name="ID">
+                                <input type="number" min="1" max="@Model.Product.Stock" value="1" name="Quantity">
+                                <input type="submit" value="Kosárba">
+                            </form>
+                        </td>
+                    </tr>
+                </table>
+                }
+            </td>
+        </tr>
+    </table>
+</div>

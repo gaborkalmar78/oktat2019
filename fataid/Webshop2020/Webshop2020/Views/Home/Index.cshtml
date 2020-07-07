@@ -65,7 +65,7 @@
         <td>
             <table>
                 <tr><td colspan="100"> +</td></tr>
-                @Helper(Model.Categories.Where(x => x.Parent == null).OrderBy(x => x.Name).ToArray(), 0)
+                @await Helper(Model.Categories.Where(x => x.Parent == null).OrderBy(x => x.Name).ToArray(), 0)
 
             </table>
         </td>
@@ -77,12 +77,20 @@
                         <th>Név</th>
                         <th>Ár</th>
                         <th>Mennyiség</th>
+                        <th>Rendelés</th>
                     </tr>
                     @for(int j=0;j<Model.Products.Length;j++) {
                         <tr>
-                            <td>@Model.Products[j].Name</td>
+                            <td><a asp-controller="Home" asp-action="Product" asp-route-ID="@Model.Products[j].ID">@Model.Products[j].Name</a></td>
                             <td>@Model.Products[j].Price</td>
                             <td>@Model.Products[j].Stock</td>
+                            <td>
+                                <form asp-controller="Cart" asp-action="Add" method="POST">
+                                    <input asp-for="Products[j].ID" type="hidden" name="ID">
+                                    <input type="number" min="1" max="@Model.Products[j].Stock" value="1" name="Quantity">
+                                    <input type="submit" value="Kosárba">
+                                </form>
+                            </td>
                         </tr>
                     }
                 </table>

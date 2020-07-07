@@ -28,6 +28,8 @@ namespace Webshop2020.Data
             modelBuilder.Entity<CategoryProduct>().HasKey(x => new { x.CategoryID, x.ProductID });
             modelBuilder.Entity<CategoryProduct>().HasOne(x => x.Category).WithMany(x => x.Products).HasForeignKey(x => x.CategoryID);
             modelBuilder.Entity<CategoryProduct>().HasOne(x => x.Product).WithMany(x => x.Categories).HasForeignKey(x => x.ProductID);
+            modelBuilder.Entity<Cart>().HasMany(x => x.Items).WithOne(y => y.Cart);
+            modelBuilder.Entity<CartItem>().HasOne(x => x.Product);
         }
         private void Seed()
         {
