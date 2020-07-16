@@ -12,26 +12,28 @@ namespace Webshop2020.Data
         public WebshopDbContext(DbContextOptions<WebshopDbContext> options)
             : base(options)
         {
-            Database.EnsureCreated();
-
-            if(Categories.Count()<1)
-            {
-                Seed();
-            }
+            //Database.EnsureCreated();
+            //Database.Migrate();
+            //if(Categories.Count()<1)
+            //{
+            //    Seed();
+            //}
         }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Cart> Carts { get; set; }
         public DbSet<Product> Products { get; set; }
+        public DbSet<CartItem> Items { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<CategoryProduct>().HasKey(x => new { x.CategoryID, x.ProductID });
             modelBuilder.Entity<CategoryProduct>().HasOne(x => x.Category).WithMany(x => x.Products).HasForeignKey(x => x.CategoryID);
             modelBuilder.Entity<CategoryProduct>().HasOne(x => x.Product).WithMany(x => x.Categories).HasForeignKey(x => x.ProductID);
-            modelBuilder.Entity<Cart>().HasMany(x => x.Items).WithOne(y => y.Cart);
-            modelBuilder.Entity<CartItem>().HasOne(x => x.Product);
+            //modelBuilder.Entity<Cart>().HasMany(x => x.Items).WithOne(y => y.Cart);
+            modelBuilder.Entity<CartItem>().HasOne(x => x.Cart).WithMany(x => x.Items).HasForeignKey(x => x.CartID);
+            modelBuilder.Entity<CartItem>().HasOne(x => x.Product).WithMany(x => x.CartItems).HasForeignKey(x => x.ProductID);
         }
-        private void Seed()
+        public void Seed()
         {
             Category[] categories = {
                 new Category("Élelmiszer", null),

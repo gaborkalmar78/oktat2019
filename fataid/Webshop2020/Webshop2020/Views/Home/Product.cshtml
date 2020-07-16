@@ -72,7 +72,7 @@
                     </tr>
                     <tr>
                         <td colspan="2">
-                            <form asp-controller="Cart" asp-action="Add" method="POST">
+                            <form asp-controller="Cart" asp-action="Add" method="GET">
                                 <input asp-for="Product.ID" type="hidden" name="ID">
                                 <input type="number" min="1" max="@Model.Product.Stock" value="1" name="Quantity">
                                 <input type="submit" value="Kosárba">

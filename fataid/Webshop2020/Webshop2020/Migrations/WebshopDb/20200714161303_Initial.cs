@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Webshop2020.Migrations.WebshopDb
 {
-    public partial class WebshopInitial : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -53,32 +53,6 @@ namespace Webshop2020.Migrations.WebshopDb
                 });
 
             migrationBuilder.CreateTable(
-                name: "CartItem",
-                columns: table => new
-                {
-                    ID = table.Column<Guid>(nullable: false),
-                    ProductID = table.Column<Guid>(nullable: true),
-                    Count = table.Column<int>(nullable: false),
-                    CartID = table.Column<Guid>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CartItem", x => x.ID);
-                    table.ForeignKey(
-                        name: "FK_CartItem_Carts_CartID",
-                        column: x => x.CartID,
-                        principalTable: "Carts",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_CartItem_Products_ProductID",
-                        column: x => x.ProductID,
-                        principalTable: "Products",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "CategoryProduct",
                 columns: table => new
                 {
@@ -102,15 +76,31 @@ namespace Webshop2020.Migrations.WebshopDb
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateIndex(
-                name: "IX_CartItem_CartID",
-                table: "CartItem",
-                column: "CartID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_CartItem_ProductID",
-                table: "CartItem",
-                column: "ProductID");
+            migrationBuilder.CreateTable(
+                name: "Items",
+                columns: table => new
+                {
+                    ID = table.Column<Guid>(nullable: false),
+                    Count = table.Column<int>(nullable: false),
+                    CartID = table.Column<Guid>(nullable: false),
+                    ProductID = table.Column<Guid>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Items", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_Items_Carts_CartID",
+                        column: x => x.CartID,
+                        principalTable: "Carts",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Items_Products_ProductID",
+                        column: x => x.ProductID,
+                        principalTable: "Products",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Categories_ParentID",
@@ -121,21 +111,31 @@ namespace Webshop2020.Migrations.WebshopDb
                 name: "IX_CategoryProduct_ProductID",
                 table: "CategoryProduct",
                 column: "ProductID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Items_CartID",
+                table: "Items",
+                column: "CartID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Items_ProductID",
+                table: "Items",
+                column: "ProductID");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "CartItem");
-
-            migrationBuilder.DropTable(
                 name: "CategoryProduct");
 
             migrationBuilder.DropTable(
-                name: "Carts");
+                name: "Items");
 
             migrationBuilder.DropTable(
                 name: "Categories");
+
+            migrationBuilder.DropTable(
+                name: "Carts");
 
             migrationBuilder.DropTable(
                 name: "Products");

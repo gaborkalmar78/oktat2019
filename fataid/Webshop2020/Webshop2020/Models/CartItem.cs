@@ -22,5 +22,7 @@ namespace Webshop2020.Models
         public Product Product { get; set; }
         public int Count { get; set; }
         public Cart Cart { get; set; }
+        public Guid CartID { get; set; }
+        public Guid ProductID { get; set; }
     }
 }

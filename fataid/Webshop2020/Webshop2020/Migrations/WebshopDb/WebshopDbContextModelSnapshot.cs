@@ -36,13 +36,13 @@ namespace Webshop2020.Migrations.WebshopDb
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid?>("CartID")
+                    b.Property<Guid>("CartID")
                         .HasColumnType("TEXT");
 
                     b.Property<int>("Count")
                         .HasColumnType("INTEGER");
 
-                    b.Property<Guid?>("ProductID")
+                    b.Property<Guid>("ProductID")
                         .HasColumnType("TEXT");
 
                     b.HasKey("ID");
@@ -51,7 +51,7 @@ namespace Webshop2020.Migrations.WebshopDb
 
                     b.HasIndex("ProductID");
 
-                    b.ToTable("CartItem");
+                    b.ToTable("Items");
                 });
 
             modelBuilder.Entity("Webshop2020.Models.Category", b =>
@@ -110,19 +110,23 @@ namespace Webshop2020.Migrations.WebshopDb
 
             modelBuilder.Entity("Webshop2020.Models.CartItem", b =>
                 {
-                    b.HasOne("Webshop2020.Models.Cart", null)
+                    b.HasOne("Webshop2020.Models.Cart", "Cart")
                         .WithMany("Items")
-                        .HasForeignKey("CartID");
+                        .HasForeignKey("CartID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Webshop2020.Models.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductID");
+                        .WithMany("CartItems")
+                        .HasForeignKey("ProductID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Webshop2020.Models.Category", b =>
                 {
                     b.HasOne("Webshop2020.Models.Category", "Parent")
-                        .WithMany()
+                        .WithMany("Children")
                         .HasForeignKey("ParentID");
                 });
 

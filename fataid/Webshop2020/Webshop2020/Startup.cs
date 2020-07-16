@@ -42,7 +42,7 @@ namespace Webshop2020
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, WebshopDbContext context)
         {
             if (env.IsDevelopment())
             {
@@ -70,6 +70,10 @@ namespace Webshop2020
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
+            if (context.Categories.Count() < 1)
+            {
+                context.Seed();
+            }
         }
     }
 }

@@ -85,7 +85,7 @@
                             <td>@Model.Products[j].Price</td>
                             <td>@Model.Products[j].Stock</td>
                             <td>
-                                <form asp-controller="Cart" asp-action="Add" method="POST">
+                                <form asp-controller="Cart" asp-action="Add" method="GET">
                                     <input asp-for="Products[j].ID" type="hidden" name="ID">
                                     <input type="number" min="1" max="@Model.Products[j].Stock" value="1" name="Quantity">
                                     <input type="submit" value="Kosárba">

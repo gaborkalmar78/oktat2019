@@ -11,6 +11,7 @@ namespace Webshop2020.Models
         {
             ID = Guid.NewGuid();
             Categories = new List<CategoryProduct>();
+            CartItems = new List<CartItem>();
         }
 
         public Product(string name, int price, int stock)
@@ -26,5 +27,6 @@ namespace Webshop2020.Models
         public int Price { get; set; }
         public int Stock { get; set; }
         public List<CategoryProduct> Categories { get; set; }
+        public List<CartItem> CartItems { get; set; }
     }
 }
