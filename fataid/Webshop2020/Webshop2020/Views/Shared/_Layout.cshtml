@@ -1,4 +1,6 @@
 ﻿<!DOCTYPE html>
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -19,18 +21,30 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     @if (User.Identity.IsAuthenticated)
                     {
-                        if (TempData.ContainsKey("Count"))
+                        @if (ViewData.ContainsKey("Type"))
                         {
-                            <div>
-                                Kosárban lévő termékek száma: @TempData["Count"]
-                                Vásárlási összeg: @TempData["CartPrice"]
-                            </div>
-                        }
-                        else
-                        {
-                            <div>
-                                A kosár üres!
-                            </div>
+                            if ((string)ViewData["Type"] == "1")
+                            {
+                                if (TempData.ContainsKey("Count"))
+                                {
+                                    <a asp-controller="Cart" asp-action="Index">
+                                        Kosárban lévő termékek száma: @TempData["Count"]
+                                        Vásárlási összeg: @TempData["CartPrice"]
+                                    </a>
+                                }
+                                else
+                                {
+                                    <a asp-controller="Cart" asp-action="Index">
+                                        A kosár üres!
+                                    </a>
+                                }
+                            }
+                            else if ((string)ViewData["Type"] == "2")
+                            {
+                                <a asp-controller="Home" asp-action="Index">
+                                    Termékek
+                                </a>
+                            }
                         }
                     }
                     <partial naame="_LoginPartial" />
@@ -41,6 +55,20 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
+                        @if (SignInManager.IsSignedIn(User))
+                        {
+                            <li class="nav-item">
+                                <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                                    <button type="submit" class="nav-link btn btn-link text-dark">Logout</button>
+                                </form>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">Login</a>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>

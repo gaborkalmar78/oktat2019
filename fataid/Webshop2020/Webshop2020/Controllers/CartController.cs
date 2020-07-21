@@ -21,19 +21,24 @@ namespace Webshop2020.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            Cart cart = Helper.FILLTEMPDATA(context, User.Identity.Name, TempData, true);
+            //return View();
+            return View("Cart", cart);
         }
+
 
         public IActionResult Add(Guid ID, int Quantity)
         {
-            Cart cart = context.Carts.Include(x => x.Items).ThenInclude(x => x.Product).FirstOrDefault(x => x.Buyer == User.Identity.Name);
-            if (cart == null)
-            {
-                cart = new Cart();
-                cart.Buyer = User.Identity.Name;
-                context.Carts.Add(cart);
-                //context.SaveChanges();
-            }
+            //Cart cart = context.Carts.Include(x => x.Items).ThenInclude(x => x.Product).OrderBy(x => x.Items.OrderBy(y => y.Product.Name)).FirstOrDefault(x => x.Buyer == User.Identity.Name);
+            //Cart cart = context.Carts.Include(x => x.Items).ThenInclude(x => x.Product).FirstOrDefault(x => x.Buyer == User.Identity.Name);
+            //if (cart == null)
+            //{
+            //    cart = new Cart();
+            //    cart.Buyer = User.Identity.Name;
+            //    context.Carts.Add(cart);
+            //    //context.SaveChanges();
+            //}
+            Cart cart = Helper.FILLTEMPDATA(context, User.Identity.Name, TempData, false);
             Product prod = context.Products.FirstOrDefault(x => x.ID == ID);
             //CartItem item = cart.Items.FirstOrDefault(x => x.Product== prod);
             CartItem item = cart.Items.FirstOrDefault(x => x.Product.ID == ID);
@@ -54,10 +59,6 @@ namespace Webshop2020.Controllers
             context.SaveChanges();
             int price = cart.Items.Sum(x => x.Count*x.Product.Price);
             int count = cart.Items.Sum(x => x.Count);
-            //for (int i=0;i<)
-            //{
-
-            //}
             if (TempData.ContainsKey("Count"))
             {
                 TempData["Count"] = count;
@@ -70,6 +71,26 @@ namespace Webshop2020.Controllers
             }
             return RedirectToAction("Product","Home", new { ID });
             //return View("Cart",cart);
+        }
+        public IActionResult CheckOut(bool verified)
+        {
+            Cart cart = Helper.FILLTEMPDATA(context, User.Identity.Name, TempData, true);
+            if(verified)
+            {
+                // update database
+                foreach(CartItem item in cart.Items)
+                {
+                    //int count = item.Count;
+                    Product prod = context.Products.FirstOrDefault(x => x.ID == item.ProductID);
+                    prod.Stock-= item.Count;
+                }
+                // empty cart
+                context.Carts.Remove(cart);
+                // update databse
+                context.SaveChanges();
+                return RedirectToAction("Product", "Home");
+            }
+            return View("Cart", cart);
         }
     }
 }

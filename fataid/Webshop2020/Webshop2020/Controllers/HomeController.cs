@@ -43,6 +43,7 @@ namespace Webshop2020.Controllers
                 products = context.Products.Where(x => x.Categories.Any(y => y.CategoryID == ID)).OrderBy(x => x.Name).ToArray();
                 //bool okay = products[0].Categories.Any(y => y.CategoryID==ID);
             }
+            Cart cart = Helper.FILLTEMPDATA(context, User.Identity.Name, TempData, true);
             return View(new IndexViewModel(cats, products));
         }
         public IActionResult Product(Guid? ID)
@@ -53,6 +54,7 @@ namespace Webshop2020.Controllers
             {
                 product = context.Products.FirstOrDefault(x => x.ID == ID);
             }
+            Cart cart = Helper.FILLTEMPDATA(context, User.Identity.Name, TempData, true);
             return View(new ProductViewModel(cats, product));
         }
 
